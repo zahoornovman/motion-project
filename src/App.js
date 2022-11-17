@@ -1,5 +1,4 @@
 import { BrowserRouter, Link, NavLink, Route, Routes } from 'react-router-dom';
-import styled from 'styled-components';
 
 // Components
 import { Profile } from './components/pages/Profile';
