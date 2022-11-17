@@ -1,6 +1,5 @@
 import { v4 as uuid } from 'uuid';
 import { createSlice } from '@reduxjs/toolkit';
-// Merge conflict victor
 
 export const postsSlice = createSlice({
     name: 'posts',
