@@ -1,5 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Post } from './Post';
+// Merge conflict Michael
+
 // import { selectPosts } from '../store/selectors'
 
 export function Posts() {
