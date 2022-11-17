@@ -1,43 +1,30 @@
-import { BrowserRouter, Link, NavLink, Route, Routes } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-// Components
-import { Profile } from './components/pages/Profile';
+// import NavBar from './components/Navbar/NavBar'
+import NotFound from "./components/NotFound/NotFound";
+import LogIn from "./components/Login/Login";
 
 function App() {
-    return (
-        <BrowserRouter>
-            <div className="App">
-                {/* // provisional header */}
-                <header className="header">
-                    <nav className="nav">
-                        <div className="left">
-                            <div className="logo">LOGO</div>
-                            <div className="posts">POSTS</div>
-                            <div className="friends">FRIENDS</div>
-                        </div>
-                        <div className="right">
-                            <div className="notifications">UNREAD</div>
-                            <div className="user">
-                                <NavLink to={'/profile'}>AVATAR</NavLink>
-                            </div>
-                            <div className="options">...</div>
-                        </div>
-                    </nav>
-                </header>
-                {/* // provisional header - end */}
-                <div className="main">
-                    <Routes>
-                        <Route path="/" element={<h1>Hello World</h1>} />
-                        <Route path="/profile" element={<Profile />}>
-                            <Route path="edit" element={<></>} />
-                        </Route>
-                        <Route path="*" element={<></>} />
-                    </Routes>
-                </div>
-                <footer className="footer"></footer>
-            </div>
-        </BrowserRouter>
-    );
+  return (
+    <BrowserRouter>
+      <div>
+        {/* <NavBar /> */}
+        <LogIn />
+      </div>
+      <Routes>
+        {/* <RequireAuth> */}
+        <Route path="/" />
+        <Route path="/friends" />
+        <Route path="/posts" />
+        <Route path="/profile" />
+        <Route path="/logout" />
+        {/* </RequireAuth> */}
+        <Route path="/login" />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
