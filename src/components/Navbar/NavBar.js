@@ -11,12 +11,12 @@ import {
   Menu,
 } from './styles';
 
-import LogoNav from "/Users/alessiotortora/Desktop/Motion/group01/src/assets/images/logo.png";
-import PostNav from "/Users/alessiotortora/Desktop/Motion/group01/src/assets/images/posts_logo.png";
-import FriendsNav from "/Users/alessiotortora/Desktop/Motion/group01/src/assets/svgs/icon-friends.svg";
-import NotificationNav from "/Users/alessiotortora/Desktop/Motion/group01/src/assets/svgs/notification_bell.svg";
-import ProfilePic from "/Users/alessiotortora/Desktop/Motion/group01/src/assets/images/users/jennifer.png";
-import MenuIcon from "/Users/alessiotortora/Desktop/Motion/group01/src/assets/svgs/menu.svg";
+import LogoNav from "../../assets/images/logo.png";
+import PostNav from "../../assets/images/posts_logo.png";
+import FriendsNav from "../../assets/svgs/icon-friends.svg";
+import NotificationNav from "./../assets/svgs/notification_bell.svg";
+import ProfilePic from "./../assets/images/users/jennifer.png";
+import MenuIcon from "./../assets/svgs/menu.svg";
 
 function NavBar(props) {
   return (
