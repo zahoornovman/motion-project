@@ -6,7 +6,7 @@ import axios from "axios";
 //styled components
 import { StyledFindFriendsPage } from '../components/styledComponents/StyledFindFriendsPage'
 
-import { selectUserToken } from "../store/slices/user";
+import { selectUserToken } from "../store/slices/loginUser";
 
 //components
 import { UserCard } from '../components/UserCard/UserCard'
