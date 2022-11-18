@@ -118,4 +118,6 @@ nav > * + * {
   margin-left: 20px;
 }
 
+box-sizing: border-box;
+
 `;
