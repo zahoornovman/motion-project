@@ -14,9 +14,9 @@ import {
 import LogoNav from "../../assets/images/logo.png";
 import PostNav from "../../assets/images/posts_logo.png";
 import FriendsNav from "../../assets/svgs/icon-friends.svg";
-import NotificationNav from "./../assets/svgs/notification_bell.svg";
-import ProfilePic from "./../assets/images/users/jennifer.png";
-import MenuIcon from "./../assets/svgs/menu.svg";
+import NotificationNav from "../../assets/svgs/notification_bell.svg";
+import ProfilePic from "../../assets/images/users/jennifer.png";
+import MenuIcon from "../../assets/svgs/menu.svg";
 
 function NavBar(props) {
   return (
