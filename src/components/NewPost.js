@@ -1,33 +1,39 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-// import { selectUserId } from '../store/selectors';
-
-import { addPost } from '../store/slices/posts'
+import { addPost } from '../store/slices/posts';
 
 function NewPost() {
-  const [newPostValue, setNewPostValue] = React.useState('');
+  const [newPost, setNewPost] = useState('');
   const dispatch = useDispatch();
-//   const userId = useSelector(selectUserId)
-  const userId = useSelector((state) => state.posts.list);
+
+  const handleAddPost = (e) => {
+    e.preventDefault();
+    // creates the dispatch action into a variable for easy reading
+    // const action = addPost(newPost);
+    dispatch(addPost(newPost));
+    // cleanes the local state
+    setNewPost('');
+  };
+
+  const handleNewPostChange = (e) => {
+    const newPost = e.currentTarget.value;
+    // sets the state with the input
+    setNewPost(newPost);
+  };
 
   return (
-    <form onSubmit={(e) => {
-      e.preventDefault();
-      setNewPostValue('')
-      dispatch(addPost({ userId: 99, content: newPostValue }));
-    }}
-    className="new-Post"
-    >
-      <input
-        placeholder="New Post"
-        value={newPostValue}
-        onChange={(e) => {
-          setNewPostValue(e.currentTarget.value);
-        }} />
-      <button>Add new Post</button>
-    </form>
-  )
+    <div className='NewPost'>
+      <form onSubmit={handleAddPost}>
+        <input
+          type='text'
+          placeholder='Your next post'
+          value={newPost}
+          onChange={handleNewPostChange}
+        />
+        <input type='submit' value={'Add'} />
+      </form>
+    </div>
+  );
 }
 
-export default NewPost;
+export { NewPost };
