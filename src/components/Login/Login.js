@@ -4,16 +4,16 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import { loginUser } from "../../store/slices/user";
 
-import LogoLogin from "/Users/alessiotortora/Desktop/Motion/group01/src/assets/images/logo_white.png";
-import FaceBook from "/Users/alessiotortora/Desktop/Motion/group01/src/assets/svgs/facebook_icon.svg";
-import InstaGram from "/Users/alessiotortora/Desktop/Motion/group01/src/assets/svgs/instagram_icon.svg";
-import Twitter from "/Users/alessiotortora/Desktop/Motion/group01/src/assets/svgs/twitter_icon.svg";
+import LogoLogin from "../../assets/images/logo_white.png";
+import FaceBook from "../../assets/svgs/facebook_icon.svg";
+import InstaGram from "../../assets/svgs/instagram_icon.svg";
+import Twitter from "../../assets/svgs/twitter_icon.svg";
 
-import AppleStore from "/Users/alessiotortora/Desktop/Motion/group01/src/assets/svgs/apple.svg";
-import GoogleStore from "/Users/alessiotortora/Desktop/Motion/group01/src/assets/svgs/google.svg";
+import AppleStore from "../../assets/svgs/apple.svg";
+import GoogleStore from "../../assets/svgs/google.svg";
 
-import PwIcon from "/Users/alessiotortora/Desktop/Motion/group01/src/assets/svgs/password.svg";
-import AvIcon from "/Users/alessiotortora/Desktop/Motion/group01/src/assets/svgs/avatar.svg";
+import PwIcon from "../../assets/svgs/password.svg";
+import AvIcon from "../../assets/svgs/avatar.svg";
 
 import {
   Container,

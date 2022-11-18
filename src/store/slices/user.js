@@ -45,4 +45,8 @@ const userSlice = createSlice({
   },
 });
 
+const selectUserToken = (store) => store.user.token 
+
 export default userSlice.reducer;
+export { selectUserToken}
+
