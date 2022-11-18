@@ -39,7 +39,7 @@ function NavBar() {
       <Link to='/find-friends'>
         <NavFriends>
           <img src={FriendsNav} alt='icon-friends'></img>
-          <p>Friends</p>
+          <p>Find Friends</p>
         </NavFriends>
       </Link>
 

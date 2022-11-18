@@ -1,3 +1,4 @@
+//libraries
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -12,8 +13,12 @@ import { Profile } from "./pages/Profile";
 import Posts from "./components/Posts";
 import { FindFriends } from "./pages/FindFriends";
 
+
+
+
 function App() {
   return (
+
     <BrowserRouter>
       <div>
         <NavBar />

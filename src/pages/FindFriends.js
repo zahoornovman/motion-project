@@ -3,22 +3,20 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
-//slices
-//import { fetchAllUsers, allUserSelect } from '../store/slices/FindFriendsSlice';
+//styled components
+import { StyledFindFriendsPage } from '../components/styledComponents/StyledFindFriendsPage'
 
 import { selectUserToken } from "../store/slices/user";
 
 //components
-import { UserCard } from '../components/UserCard'
+import { UserCard } from '../components/UserCard/UserCard'
 
 
 
 
 
 function FindFriends (){
-
-
-    
+ 
 
     let token = useSelector(selectUserToken);
     console.log(token);
@@ -50,12 +48,9 @@ function FindFriends (){
     console.log(list)
 
     return(
-        <>
-        <h1>Find Friends</h1>
-        <div>
+        <StyledFindFriendsPage>
         {list.map( obj => <UserCard key = {obj.id} obj ={obj}/>)}
-        </div>
-        </>
+        </StyledFindFriendsPage>
     )
 
 }
