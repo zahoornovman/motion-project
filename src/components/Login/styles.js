@@ -1,13 +1,11 @@
 import styled from "styled-components";
 
-import BackGround from "/Users/alessiotortora/Desktop/Motion/group01/src/assets/images/background_image.png";
+import BackGround from "../../assets/images/background_image.png";
 
 export const Container = styled.div`
   display: flex;
   width: 100%;
   height: 100vh;
-  border: solid black 2px;
-  
 `;
 
 export const ContainerLeft = styled.div`
@@ -24,13 +22,11 @@ export const ContainerLeft = styled.div`
 export const ContainerLeftTop = styled.div`
   height: 50%;
   width: 100%;
-  border: 1px solid red;
 `;
 
 export const ContainerLeftBottom = styled.div`
   height: 50%;
   width: 100%;
-  border: 1px solid green;
 `;
 
 export const ContainerRight = styled.div`
