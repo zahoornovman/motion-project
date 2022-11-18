@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import BackGround from "/Users/alessiotortora/Desktop/Motion/group01/src/assets/images/background_image.png";
+import BackGround from "../../assets/images/background_image.png";
 
 export const Container = styled.div`
   display: flex;
