@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
-import { loginUser } from "../../store/slices/user";
+import { loginUser } from "../../store/slices/loginUser";
 
 import LogoLogin from "/Users/alessiotortora/Desktop/Motion/group01/src/assets/images/logo_white.png";
 import FaceBook from "/Users/alessiotortora/Desktop/Motion/group01/src/assets/svgs/facebook_icon.svg";

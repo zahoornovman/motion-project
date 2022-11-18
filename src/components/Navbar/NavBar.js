@@ -18,7 +18,7 @@ import NotificationNav from "/Users/alessiotortora/Desktop/Motion/group01/src/as
 import ProfilePic from "/Users/alessiotortora/Desktop/Motion/group01/src/assets/images/users/jennifer.png";
 import MenuIcon from "/Users/alessiotortora/Desktop/Motion/group01/src/assets/svgs/menu.svg";
 
-function NavBar() {
+function NavBar(props) {
   return (
     <NavContainer>
 
@@ -56,10 +56,10 @@ function NavBar() {
         </ProfileIcon>
       </Link>
 
-      <Menu>
+      {props.isLoggedIn === true && ( <Menu>
         <img src={MenuIcon} alt='icon-menu'></img>
-      </Menu>
-      
+      </Menu>)}
+
     </NavContainer>
   );
 }
