@@ -18,7 +18,7 @@ import NotificationNav from "../../assets/svgs/notification_bell.svg";
 import ProfilePic from "../../assets/images/users/jennifer.png";
 import MenuIcon from "../../assets/svgs/menu.svg";
 
-function NavBar() {
+function NavBar(props) {
   return (
     <NavContainer>
 
@@ -56,10 +56,10 @@ function NavBar() {
         </ProfileIcon>
       </Link>
 
-      <Menu>
+      {props.isLoggedIn === true && ( <Menu>
         <img src={MenuIcon} alt='icon-menu'></img>
-      </Menu>
-      
+      </Menu>)}
+
     </NavContainer>
   );
 }
