@@ -13,7 +13,11 @@ export function Posts() {
   return (
     <ul className='posts'>
       {posts.map(post => <Post post={post} key={post.postId} />)}
+     <NewPost />
     </ul>
+      // <div>
+      // {/* <NewPost /> */}
+      // </div>
   )
 }
 
