@@ -125,4 +125,6 @@ nav > * + * {
   font-style: normal;
 }
 
+box-sizing: border-box;
+
 `;

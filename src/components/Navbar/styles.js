@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const NavContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-content: center;
-  width: 1440px;
+  width: 100%;
   height: 80px;
   left: 0px;
   top: 0px;
@@ -47,7 +47,6 @@ export const NavPost = styled.div`
 export const NavFriends = styled.div`
   width: 84px;
   height: 80px;
- 
 
   display: flex;
   justify-content: center;
@@ -57,7 +56,7 @@ export const NavFriends = styled.div`
     border-bottom: 2px solid #ad73fd;
   }
 
-  p{
+  p {
     margin-left: 17px;
   }
 `;
