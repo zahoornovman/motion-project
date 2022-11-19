@@ -47,6 +47,12 @@ export const StyledAvatar = styled.div`
 export const StyledUserDetailsContainer = styled.div`
     height: 100%;
 `;
+export const StyledTopContainer = styled.div`
+    max-height: 70%;
+    display: flex;
+    border-bottom: 2px solid #00000010;
+    border-top: 2px solid #00000000;
+`;
 
 export const StyledContactSection = styled.section`
     display: flex;
@@ -99,13 +105,6 @@ export const StyledHobbiesSection = styled.section`
             border-radius: 18px;
         }
     }
-`;
-
-export const StyledTopContainer = styled.div`
-    max-height: 70%;
-    display: flex;
-    border-bottom: 2px solid #00000010;
-    border-top: 2px solid #00000000;
 `;
 
 export const StyledStatsContainer = styled.div`
