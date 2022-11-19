@@ -1,10 +1,13 @@
 //libraries
 import React from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import {selectUserToken} from '../src/store/slices/loginUser'
 
 
 //components
-import NavBar from './components/Navbar/NavBar';;
+import NavBar from './components/Navbar/NavBar';
 
 //pages
 import NotFound from './components/NotFound/NotFound';
@@ -19,13 +22,16 @@ import Registration from "./components/Registration/registration";
 
 let userIsLoggedin = true;
 
+
 function App() {
     return (
         <BrowserRouter>
+        {/* { userIsLoggedin &&  */}
             <div>
                 <NavBar isLoggedIn={userIsLoggedin} />
                 {/* <LogIn /> */}
-            </div>
+            </div> 
+            {/* } */}
             <Routes>
                 {/* <RequireAuth> */}
                 <Route path="/" />
