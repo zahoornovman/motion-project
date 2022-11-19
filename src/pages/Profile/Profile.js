@@ -1,5 +1,7 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
+// Components
 import {
     StyledAvatar,
     StyledProfileCard,
@@ -13,16 +15,30 @@ import {
     StyledStat,
 } from './styles';
 
+import {
+    SecondaryButton,
+    PrimaryButton,
+} from '../../components/styledComponents/StyledButtons';
+
 import Jenniffer from '../../assets/images/users/jennifer.png';
 
 export const Profile = () => {
+    const navigate = useNavigate();
+    const toEditProfile = '/profile/edit';
+
     return (
         <StyledProfileCard>
             <StyledAvatar>
                 <img src={Jenniffer} alt="profile picture" />
                 <span id="name">Jennifer Smith</span>
                 <span id="location">Zurich, Switzerland</span>
-                <button>EDIT PROFILE</button>
+                <SecondaryButton
+                    onClick={() => {
+                        navigate(toEditProfile);
+                    }}
+                >
+                    EDIT PROFILE
+                </SecondaryButton>
             </StyledAvatar>
             <StyledUserDetailsContainer>
                 <StyledTopContainer>

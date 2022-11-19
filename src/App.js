@@ -2,18 +2,20 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+
 //components
-import NavBar from './components/Navbar/NavBar';
+import NavBar from './components/Navbar/NavBar';;
 
 //pages
 import NotFound from './components/NotFound/NotFound';
 import LogIn from './components/Login/Login';
 import { Profile } from './pages/Profile/Profile';
+import { ProfileEdit } from './pages/ProfileEdit/ProfileEdit';
 import Posts from './components/Posts';
 import { FindFriends } from './pages/FindFriends';
 
-import RequireAuth from './components/RequireAuth';
-import Registration from './components/Registration/registration';
+import RequireAuth from "./components/RequireAuth";
+import Registration from "./components/Registration/registration";
 
 let userIsLoggedin = true;
 
@@ -41,7 +43,15 @@ function App() {
                     path="/profile"
                     element={
                         <RequireAuth>
-                            <Profile />
+                            <Profile></Profile>
+                        </RequireAuth>
+                    }
+                />
+                <Route
+                    path="/profile/edit"
+                    element={
+                        <RequireAuth>
+                            <ProfileEdit />
                         </RequireAuth>
                     }
                 />
