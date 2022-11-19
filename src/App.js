@@ -1,8 +1,7 @@
 //libraries
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 
 //components
 import NavBar from './components/Navbar/NavBar';;
@@ -14,8 +13,6 @@ import { Profile } from './pages/Profile/Profile';
 import { ProfileEdit } from './pages/ProfileEdit/ProfileEdit';
 import Posts from './components/Posts';
 import { FindFriends } from './pages/FindFriends';
-
-
 
 import RequireAuth from "./components/RequireAuth";
 import Registration from "./components/Registration/registration";
