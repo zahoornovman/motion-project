@@ -1,5 +1,8 @@
+// Libraries
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { getCurrentUser } from '../../store/slices/currentUser';
 
 // Components
 import {
@@ -20,11 +23,14 @@ import {
     PrimaryButton,
 } from '../../components/styledComponents/StyledButtons';
 
+// Assets
 import Jenniffer from '../../assets/images/users/jennifer.png';
 
+// Component
 export const Profile = () => {
     const navigate = useNavigate();
     const toEditProfile = '/profile/edit';
+    const dispatch = useDispatch();
 
     return (
         <StyledProfileCard>
@@ -34,6 +40,8 @@ export const Profile = () => {
                 <span id="location">Zurich, Switzerland</span>
                 <SecondaryButton
                     onClick={() => {
+                        // console.log('dispatch');
+                        // dispatch(getCurrentUser('payload'));
                         navigate(toEditProfile);
                     }}
                 >
