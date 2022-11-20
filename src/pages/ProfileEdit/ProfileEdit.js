@@ -30,20 +30,32 @@ export const ProfileEdit = () => {
     // State
     const [userStatus, setUserStatus] = React.useState(currentUser.status);
     const [firstName, setFirstName] = React.useState(currentUser.first_name);
+    const [lastName, setLastName] = React.useState(currentUser.last_name);
+    const [email, setEmail] = React.useState(currentUser.first_name);
+    const [username, setUsername] = React.useState(currentUser.username);
+    const [location, setLocation] = React.useState(currentUser.first_name);
+    const [phone, setPhone] = React.useState(currentUser.first_name);
+    const [about, setAbout] = React.useState(currentUser.first_name);
+    const [password, setPassword] = React.useState(currentUser.first_name);
+    const [avatar, setAvatar] = React.useState(currentUser.avatar);
+    const [banner, setBanner] = React.useState(currentUser.banner);
+    const [thingsUserLikes, setThingsUserLikes] = React.useState(
+        currentUser.first_name
+    );
 
     // Methods
     const onLoad = () => {
-        console.log('inside onload');
         const payload = { token: `Bearer ${token}` };
         dispatch(getCurrentUser(payload));
     };
 
     // Component did mount
     useEffect(() => {
-        console.log('initial load');
-        console.log('state', firstName);
         onLoad();
     }, []);
+    // useEffect(() => {
+    //     console.log('currentUser after thunk', currentUser);
+    // }, [currentUser]);
 
     // Render
     if (userStatus === 'pending') {
@@ -75,15 +87,16 @@ export const ProfileEdit = () => {
                     //     e.preventDefault();
                     // }}
                     >
-                        {/* <StyledInputText
+                        <StyledInputText
                             label="First name"
                             placeholder="Jenniffer"
                             value={firstName}
                             onChange={(e) => {
                                 const input = e.target.value;
                                 setFirstName(input);
+                                console.log(input);
                             }}
-                        ></StyledInputText> */}
+                        ></StyledInputText>
 
                         <div>
                             <label htmlFor="input">First name</label>
@@ -94,7 +107,6 @@ export const ProfileEdit = () => {
                                     const input = e.target.value;
                                     console.log(input);
                                     setFirstName(input);
-                                    console.log(firstName);
                                 }}
                                 value={firstName}
                             ></input>

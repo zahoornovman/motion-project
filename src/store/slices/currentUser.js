@@ -1,11 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { selectUserToken } from './loginUser';
 
 export const getCurrentUser = createAsyncThunk(
     'user/getUser',
     async (payload) => {
-        console.log(payload);
         try {
             const { data } = await axios.get(
                 'https://motion.propulsion-home.ch/backend/api/users/me/',
@@ -16,7 +14,6 @@ export const getCurrentUser = createAsyncThunk(
                 },
                 payload
             );
-            console.log(data);
             return data;
         } catch (err) {
             console.log(err);
@@ -25,7 +22,7 @@ export const getCurrentUser = createAsyncThunk(
 );
 
 const initialState = {
-    id: null,
+    id: '',
     email: '',
     first_name: '',
     last_name: '',
@@ -67,9 +64,6 @@ const currentUser = createSlice({
                 console.log('status: fullfilled');
                 console.log('fullfillled action', action);
 
-                const keys = Object.keys(action.payload);
-                console.log(...keys);
-
                 const {
                     id,
                     first_name,
@@ -102,7 +96,16 @@ const currentUser = createSlice({
                 // state.phone = phone; // phone missing from endpoint?
                 state.about_me = about_me;
                 // state.password = password; // password missing from endpoint?
+                state.avatar = avatar;
+                state.banner = banner;
+                state.amount_of_posts = amount_of_posts;
+                state.amount_of_likes = amount_of_likes;
+                state.amount_of_friends = amount_of_friends;
+                state.amount_of_followers = amount_of_followers;
+                state.amount_following = amount_following;
                 state.things_user_likes = things_user_likes;
+
+                console.log('state after thunk', state.first_name);
             })
             .addCase(getCurrentUser.rejected, (state, action) => {
                 state.status = 'rejected';
