@@ -45,6 +45,7 @@ export const ProfileEdit = () => {
     const [location, setLocation] = React.useState('');
     // const [phone, setPhone] = React.useState(currentUser.phone);
     const [about, setAbout] = React.useState('');
+    const [avatar, setAvatar] = React.useState('');
     // const [password, setPassword] = React.useState(currentUser.password);
     // const [avatar, setAvatar] = React.useState(currentUser.avatar);
     // const [banner, setBanner] = React.useState(currentUser.banner);
@@ -91,6 +92,8 @@ export const ProfileEdit = () => {
         setUsername(currentUser.username);
         setLocation(currentUser.location);
         setAbout(currentUser.about_me);
+        setAvatar(currentUser.avatar);
+
         // setThingsUserLikes(currentUser.things_user_likes);
     }, [currentUser]);
 
@@ -104,7 +107,7 @@ export const ProfileEdit = () => {
             <StyledProfileCardEdit>
                 <StyledAvatarEdit>
                     <div id="update-image">
-                        <img src={Jenniffer} alt="profile picture" />
+                        <img src={avatar} alt="profile picture" />
                         <SecondaryButton onClick={() => {}}>
                             update image
                         </SecondaryButton>
