@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+// Thunks
+//// get current user
 export const getCurrentUser = createAsyncThunk(
     'user/getUser',
     async (payload) => {
@@ -12,7 +14,30 @@ export const getCurrentUser = createAsyncThunk(
                         Authorization: payload.token,
                     },
                 },
-                payload
+                payload.body
+            );
+            return data;
+        } catch (err) {
+            console.log(err);
+        }
+    }
+);
+
+//// update current user
+export const updateCurrentUser = createAsyncThunk(
+    'user/updateUser',
+    async (payload) => {
+        console.log('updating user with', payload.body);
+        try {
+            const { data } = await axios.patch(
+                'https://motion.propulsion-home.ch/backend/api/users/me/',
+
+                payload.body,
+                {
+                    headers: {
+                        Authorization: payload.token,
+                    },
+                }
             );
             return data;
         } catch (err) {
@@ -57,12 +82,12 @@ const currentUser = createSlice({
         builder
             .addCase(getCurrentUser.pending, (state, action) => {
                 state.status = 'pending';
-                console.log('status: pending');
+                // console.log('status: pending');
             })
             .addCase(getCurrentUser.fulfilled, (state, action) => {
                 state.status = 'fullfilled';
-                console.log('status: fullfilled');
-                console.log('fullfillled action', action);
+                // console.log('status: fullfilled');
+                // console.log('fullfillled action', action);
 
                 const {
                     id,
@@ -92,6 +117,7 @@ const currentUser = createSlice({
                 state.last_name = last_name;
                 state.email = email;
                 state.username = username;
+                state.job = job;
                 state.location = location;
                 // state.phone = phone; // phone missing from endpoint?
                 state.about_me = about_me;
@@ -103,13 +129,13 @@ const currentUser = createSlice({
                 state.amount_of_friends = amount_of_friends;
                 state.amount_of_followers = amount_of_followers;
                 state.amount_following = amount_following;
-                state.things_user_likes = things_user_likes;
-
-                console.log('state after thunk', state.first_name);
+                // state.things_user_likes = things_user_likes;
+                state.things_user_likes = {
+                    keyword: 'string',
+                };
             })
             .addCase(getCurrentUser.rejected, (state, action) => {
                 state.status = 'rejected';
-
                 console.log('status: rejected');
                 console.log(action.error.message);
             });
