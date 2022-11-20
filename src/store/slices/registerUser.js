@@ -37,7 +37,6 @@ const registerUser = createSlice({
       state.loading = "loading complete";
     },
     [newUser.rejected]: (state, action) => {
-      //console.log(action)
       state.error = action.payload.email;
       state.loading = "Error Loading";
     },

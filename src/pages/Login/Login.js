@@ -25,6 +25,8 @@ import {
   ContainerLeftTop,
   SignUpBtn,
   SignInBtn,
+  SocialMed,
+  Store,
 } from "./styles";
 
 const Login = () => {
@@ -55,24 +57,27 @@ const Login = () => {
           <h2>Motion</h2>
         </ContainerLeftTop>
         <ContainerLeftBottom>
-          <p>
+          <h2>
             Connect with friends and the world
             <br></br>
             around you with Motion.
-          </p>
-          <img src={AppleStore} alt="AppleStore"></img>
-          <img src={GoogleStore} alt="GoogleStore"></img>
-
-          <img src={Twitter} alt="Twitter"></img>
-          <img src={FaceBook} alt="facebook"></img>
-          <img src={InstaGram} alt="InstaGram"></img>
+          </h2>
+          <div>
+            <Store src={AppleStore} alt="AppleStore" />
+            <Store src={GoogleStore} alt="GoogleStore" />
+          </div>
+          <div>
+            <SocialMed src={Twitter} alt="Twitter" />
+            <SocialMed src={FaceBook} alt="facebook" />
+            <SocialMed src={InstaGram} alt="InstaGram" />
+          </div>
           <p>© Motion 2018. All rights reserved.</p>
         </ContainerLeftBottom>
       </ContainerLeft>
       <ContainerRight>
         <ContainerRightTop>
           <p>Don't have an account?</p>
-          <Link to="/">
+          <Link to="/registration">
             <SignUpBtn>
               <p>SIGN UP</p>
             </SignUpBtn>
@@ -104,11 +109,10 @@ const Login = () => {
               />
             </div>
             <>
-            <SignInBtn>
-              <p>SIGN IN</p>
-            </SignInBtn>
+              <SignInBtn>
+                <p>SIGN IN</p>
+              </SignInBtn>
             </>
-
           </form>
         </ContainerRightBottom>
       </ContainerRight>

@@ -1,40 +1,102 @@
-import { v4 as uuid } from "uuid";
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
-export const postsSlice = createSlice({
-  name: "posts",
-  initialState: {
-    list: [
-      { userId: 99, postId: uuid(), content: "Hello", liked: true },
-      { userId: 99, postId: uuid(), content: "Good morning", liked: false },
-      { userId: 99, postId: uuid(), content: "Bye!", liked: false },
-    ],
-  },
-  reducers: {
-    addPost: (state, action) => {
-      const post = {
-        userId: 99,
-        postId: uuid(),
-        content: action.payload,
-        liked: false,
-      };
-      state.list.push(post);
-    },
-    removePost: (state, action) => {
-      state.list = state.list.filter((post) => post.postId !== action.payload);
-    },
-    toggleLiked: (state, action) => {
-      // gets the index of the post from the state
-      const postIndex = state.list.findIndex(
-        (post) => post.postId === action.payload
+export const fetchPosts = createAsyncThunk(
+  "user/getPosts}",
+  async (payload) => {
+    console.log(payload);
+    try {
+      const { data } = await axios.get(
+        "https://motion.propulsion-home.ch/backend/api/social/posts/me/",
+        {
+          headers: {
+            Authorization:
+              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY5MTE1NzI4LCJqdGkiOiI2YjJiMGYwNjllZTA0NGJiYTdlNzIzNjBlZGQ5Yjk5MCIsInVzZXJfaWQiOjE5OTF9.y0MGJbv6n6cSr2cQ70VWFMA73PuScw6pMoviJ-J_PI8",
+          },
+        },
+        payload
       );
-      const post = state.list[postIndex];
-      // inverts the property of post liked
-      post.liked = !post.liked;
-    },
+
+      return data.results.map((post) => post);
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
+
+export const addNewPost = createAsyncThunk(
+  'posts/addNewPost',
+    // The payload creator receives the partial `{title, content, user}` object
+  
+  async (payload) => {
+    console.log(payload);
+    payload = JSON.stringify({
+      "user": {
+        "email": "michael.zolliker@gmail.com",
+        "username": "michaelzolliker"
+      },
+      "content": "michael test"
+    });
+    console.log(payload);
+    
+    try {
+      const { data } = await axios.post(
+        'https://motion.propulsion-home.ch/backend/api/social/posts/',
+        {
+          headers: {
+            Authorization:
+              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY5MTE1NzI4LCJqdGkiOiI2YjJiMGYwNjllZTA0NGJiYTdlNzIzNjBlZGQ5Yjk5MCIsInVzZXJfaWQiOjE5OTF9.y0MGJbv6n6cSr2cQ70VWFMA73PuScw6pMoviJ-J_PI8",
+          },
+        },
+        payload
+      );
+
+      return data;
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
+
+const initialState = {
+  posts: [],
+  status: "idle",
+  error: null,
+};
+
+const postsSlice = createSlice({
+  name: "posts",
+  initialState,
+  reducers: {
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchPosts.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(fetchPosts.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        // Add any fetched posts to the array
+        state.posts = state.posts.concat(action.payload);
+      })
+      .addCase(fetchPosts.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(addNewPost.fulfilled, (state, action) => {
+        // We can directly add the new post object to our posts array
+        state.posts.push(action.payload)
+      });
   },
 });
 
-export const { addPost, removePost, toggleLike } = postsSlice.actions;
+// export const { addPost } = postsSlice.actions;
 
 export default postsSlice.reducer;
+
+export const selectAllPosts = (state) => state.posts;
+
+// export const selectPostById = (state, postId) =>
+//   state.posts.posts.find((post) => post.id === postId);
