@@ -1,9 +1,12 @@
 //libraries
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
-import { selectUserToken } from '../src/store/slices/loginUser';
+import { useSelector } from 'react-redux';
+import {
+    selectUserToken,
+    selectUserToken as x,
+} from '../src/store/slices/loginUser';
 
 //components
 import NavBar from './components/Navbar/NavBar';
@@ -21,26 +24,33 @@ import Registration from './pages/Login/Registration/registration';
 import RegValidation from './pages/Login/RegValidation/validation';
 import RegSuccess from './pages/Login/RegSucces/succes';
 
-console.log(selectUserToken);
+let userIsLoggedin = true;
 
 function App() {
-    // const [token, setToken] = useState(false);
+    console.log(useSelector(selectUserToken));
+    // let x = '';
+    let x = useSelector(selectUserToken);
 
-    // if(selectUserToken !== ''){
-    //   setToken(true)
-    // } else {
-    //   setToken(false)
-    // }
+    const [token, setToken] = useState(false);
 
-    let userIsLoggedin = true;
+    useEffect(() => {
+        if (x !== '') {
+            console.log('use effect trigger');
+            setToken(true);
+        } else {
+            setToken(false);
+        }
+    }, [x]);
+
+    let userIsLoggedin = !token;
 
     return (
         <BrowserRouter>
-            {/* { userIsLoggedin &&   */}
-            <div>
-                <NavBar isLoggedIn={userIsLoggedin} />
-            </div>
-            {/* } */}
+            {token && (
+                <div>
+                    <NavBar isLoggedIn={userIsLoggedin} />
+                </div>
+            )}
 
             <Routes>
                 {/* <RequireAuth> */}
