@@ -113,6 +113,7 @@ const currentUser = createSlice({
                     amount_following,
                 } = action.payload;
 
+                state.id = id;
                 state.first_name = first_name;
                 state.last_name = last_name;
                 state.email = email;
@@ -129,11 +130,20 @@ const currentUser = createSlice({
                 state.amount_of_friends = amount_of_friends;
                 state.amount_of_followers = amount_of_followers;
                 state.amount_following = amount_following;
-                // state.things_user_likes = things_user_likes;
-                state.things_user_likes = {
-                    keyword: 'string',
-                };
+                state.things_user_likes = things_user_likes;
+                // state.things_user_likes = [
+                //     {
+                //         keyword: 'strings',
+                //     },
+                //     {
+                //         keyword: 'coding',
+                //     },
+                //     {
+                //         keyword: 'react',
+                //     },
+                // ];
             })
+
             .addCase(getCurrentUser.rejected, (state, action) => {
                 state.status = 'rejected';
                 console.log('status: rejected');

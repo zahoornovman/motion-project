@@ -15,7 +15,7 @@ export const StyledProfileCardEdit = styled.section`
     box-shadow: 0px 0px 1px #00000020, 0px 10px 20px #00000005;
 `;
 
-export const StyledAvatar = styled.div`
+export const StyledAvatarEdit = styled.div`
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
@@ -51,13 +51,21 @@ export const StyledAvatar = styled.div`
     }
 `;
 
-export const StyledUserDetailsContainer = styled.div`
-    /* height: 100%; */
+export const StyledUserDetailsContainerEdit = styled.div`
+    /* height: 100%;
+    min-width: 400px; */
 `;
 
-export const StyledForm = styled.form``;
+export const StyledFormEdit = styled.form`
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    /* display: column wrap; */
+    /* flex-grow: 1; */
+`;
 
-export const StyledHobbiesSection = styled.section`
+export const StyledHobbiesSectionEdit = styled.section`
     display: flex;
     flex-flow: column;
     justify-content: flex-start;

@@ -10,12 +10,15 @@ import { selectUserToken } from '../../store/slices/loginUser';
 
 // Components
 import {
-    StyledAvatar,
+    StyledAvatarEdit,
     StyledProfileCardEdit,
-    StyledUserDetailsContainer,
-    StyledForm,
+    StyledUserDetailsContainerEdit,
+    StyledFormEdit,
 } from './styles';
-import { StyledInputText } from '../../components/styledComponents/StyledInput';
+import {
+    StyledInputHobbies,
+    StyledInputText,
+} from '../../components/styledComponents/StyledInput';
 import {
     SecondaryButton,
     PrimaryButton,
@@ -33,22 +36,23 @@ export const ProfileEdit = () => {
 
     // State
     const [userStatus, setUserStatus] = React.useState(currentUser.status);
-    const [firstName, setFirstName] = React.useState(currentUser.first_name);
-    const [lastName, setLastName] = React.useState(currentUser.last_name);
-    const [email, setEmail] = React.useState(currentUser.email);
-    const [username, setUsername] = React.useState(currentUser.username);
-    const [job, setJob] = React.useState(currentUser.job);
-    const [location, setLocation] = React.useState(currentUser.location);
+    const [id, setId] = React.useState('');
+    const [firstName, setFirstName] = React.useState('');
+    const [lastName, setLastName] = React.useState('');
+    const [email, setEmail] = React.useState('');
+    const [username, setUsername] = React.useState('');
+    const [job, setJob] = React.useState('');
+    const [location, setLocation] = React.useState('');
     // const [phone, setPhone] = React.useState(currentUser.phone);
-    const [about, setAbout] = React.useState(currentUser.about);
+    const [about, setAbout] = React.useState('');
     // const [password, setPassword] = React.useState(currentUser.password);
     // const [avatar, setAvatar] = React.useState(currentUser.avatar);
     // const [banner, setBanner] = React.useState(currentUser.banner);
-    const [thingsUserLikes, setThingsUserLikes] = React.useState(
-        currentUser.things_user_likes
-    );
+    // const [thingsUserLikes, setThingsUserLikes] = React.useState(
+    //     currentUser.things_user_likes
+    // );
 
-    const body = {
+    const updatedUser = {
         email: email,
         first_name: firstName,
         last_name: lastName,
@@ -56,7 +60,7 @@ export const ProfileEdit = () => {
         job: job,
         location: location,
         about_me: about,
-        things_user_likes: thingsUserLikes,
+        // things_user_likes: thingsUserLikes,
     };
 
     // Methods
@@ -69,7 +73,7 @@ export const ProfileEdit = () => {
     const onSave = () => {
         // console.log('saving changes...');
         // console.log('body at save', body);
-        const payload = { token: `Bearer ${token}`, body: body };
+        const payload = { token: `Bearer ${token}`, body: updatedUser };
         dispatch(updateCurrentUser(payload));
     };
 
@@ -78,12 +82,16 @@ export const ProfileEdit = () => {
         onLoad();
     }, []);
 
-    // Store changes
+    // When store changes
     useEffect(() => {
+        setId(currentUser.id);
         setFirstName(currentUser.first_name);
+        setLastName(currentUser.last_name);
         setEmail(currentUser.email);
         setUsername(currentUser.username);
-        setThingsUserLikes(currentUser.things_user_likes);
+        setLocation(currentUser.location);
+        setAbout(currentUser.about_me);
+        // setThingsUserLikes(currentUser.things_user_likes);
     }, [currentUser]);
 
     // Render
@@ -94,7 +102,7 @@ export const ProfileEdit = () => {
     } else {
         return (
             <StyledProfileCardEdit>
-                <StyledAvatar>
+                <StyledAvatarEdit>
                     <div id="update-image">
                         <img src={Jenniffer} alt="profile picture" />
                         <SecondaryButton onClick={() => {}}>
@@ -107,13 +115,9 @@ export const ProfileEdit = () => {
                         </SecondaryButton>
                         <PrimaryButton onClick={onSave}>save</PrimaryButton>
                     </div>
-                </StyledAvatar>
-                <StyledUserDetailsContainer>
-                    <StyledForm
-                    // onSubmit={(e) => {
-                    //     e.preventDefault();
-                    // }}
-                    >
+                </StyledAvatarEdit>
+                <StyledUserDetailsContainerEdit>
+                    <StyledFormEdit>
                         <StyledInputText
                             label="First name"
                             placeholder="Jenniffer"
@@ -121,7 +125,6 @@ export const ProfileEdit = () => {
                             onChange={(e) => {
                                 const input = e.target.value;
                                 setFirstName(input);
-                                console.log(input);
                             }}
                         ></StyledInputText>
                         <StyledInputText
@@ -131,7 +134,6 @@ export const ProfileEdit = () => {
                             onChange={(e) => {
                                 const input = e.target.value;
                                 setLastName(input);
-                                console.log(input);
                             }}
                         ></StyledInputText>
                         <StyledInputText
@@ -141,7 +143,6 @@ export const ProfileEdit = () => {
                             onChange={(e) => {
                                 const input = e.target.value;
                                 setEmail(input);
-                                console.log(input);
                             }}
                         ></StyledInputText>
                         <StyledInputText
@@ -151,7 +152,6 @@ export const ProfileEdit = () => {
                             onChange={(e) => {
                                 const input = e.target.value;
                                 setUsername(input);
-                                console.log(input);
                             }}
                         ></StyledInputText>
                         <StyledInputText
@@ -161,7 +161,6 @@ export const ProfileEdit = () => {
                             onChange={(e) => {
                                 const input = e.target.value;
                                 setLocation(input);
-                                console.log(input);
                             }}
                         ></StyledInputText>
                         <StyledInputText
@@ -171,21 +170,21 @@ export const ProfileEdit = () => {
                             onChange={(e) => {
                                 const input = e.target.value;
                                 setAbout(input);
-                                console.log(input);
                             }}
                         ></StyledInputText>
-                        <StyledInputText
+                        {/* <StyledInputHobbies
                             label="Things I like"
                             placeholder="Fishing, dancing"
                             value={thingsUserLikes}
                             onChange={(e) => {
                                 const input = e.target.value;
+
                                 setThingsUserLikes(input);
                                 console.log(input);
                             }}
-                        ></StyledInputText>
-                    </StyledForm>
-                </StyledUserDetailsContainer>
+                        ></StyledInputHobbies> */}
+                    </StyledFormEdit>
+                </StyledUserDetailsContainerEdit>
             </StyledProfileCardEdit>
         );
     }
