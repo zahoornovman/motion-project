@@ -1,9 +1,11 @@
 //libraries
 import React from "react";
-// import { useState } from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import { useSelector } from 'react-redux';
-// import {selectUserToken} from '../src/store/slices/loginUser'
+import {selectUserToken} from '../src/store/slices/loginUser'
+
+
 
 //components
 import NavBar from "./components/Navbar/NavBar";
@@ -19,23 +21,44 @@ import { FindFriends } from "./pages/FindFriends";
 import RequireAuth from "./components/RequireAuth";
 import Registration from "./pages/Login/Registration/registration";
 import RegValidation from "./pages/Login/RegValidation/validation";
-import  RegSuccess  from "./pages/Login/RegSucces/succes";
+import RegSuccess from "./pages/Login/RegSucces/succes";
 
-let userIsLoggedin = true;
+
+
+console.log(selectUserToken)
+
 
 function App() {
+
+  // const [token, setToken] = useState(false);
+
+  // if(selectUserToken !== ''){
+  //   setToken(true)
+  // } else {
+  //   setToken(false)
+  // }
+
+  let userIsLoggedin = true;
+
   return (
     <BrowserRouter>
-      {/* { userIsLoggedin &&  */}
+      {/* { userIsLoggedin &&   */}
       <div>
         <NavBar isLoggedIn={userIsLoggedin} />
-        {/* <LogIn /> */}
       </div>
-      {/* } */}
+         {/* } */}
+
       <Routes>
         {/* <RequireAuth> */}
         <Route path="/" />
-        <Route path="/find-friends" element={<FindFriends />} />
+        <Route
+          path="/find-friends"
+          element={
+            <RequireAuth>
+              <FindFriends />
+            </RequireAuth>
+          }
+        />
         <Route path="/signup" />
         <Route
           path="/posts"
