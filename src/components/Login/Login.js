@@ -39,8 +39,6 @@ const Login = () => {
     password: "",
   });
 
-  console.log(user);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     await dispatch(loginUser(user));
@@ -104,11 +102,10 @@ const Login = () => {
               />
             </div>
             <>
-            <SignInBtn>
-              <p>SIGN IN</p>
-            </SignInBtn>
+              <SignInBtn>
+                <p>SIGN IN</p>
+              </SignInBtn>
             </>
-
           </form>
         </ContainerRightBottom>
       </ContainerRight>
