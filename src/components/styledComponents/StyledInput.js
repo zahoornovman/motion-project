@@ -9,6 +9,7 @@ export const StyledInputText = (props) => {
                 name="input"
                 placeholder={props.placeholder}
                 onChange={props.onChange}
+                value={props.value}
             ></input>
         </div>
     );
