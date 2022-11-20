@@ -46,6 +46,7 @@ export const StyledAvatar = styled.div`
 
 export const StyledUserDetailsContainer = styled.div`
     height: 100%;
+    width: 100%;
 `;
 export const StyledTopContainer = styled.div`
     max-height: 70%;

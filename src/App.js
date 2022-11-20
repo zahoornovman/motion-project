@@ -13,14 +13,16 @@ import NavBar from './components/Navbar/NavBar';
 
 //pages
 import NotFound from './components/NotFound/NotFound';
-import LogIn from './components/Login/Login';
+import LogIn from './pages/Login/Login';
 import { Profile } from './pages/Profile/Profile';
 import { ProfileEdit } from './pages/ProfileEdit/ProfileEdit';
-import PostsList from './components/PostsList';
+import Posts from './components/Posts';
 import { FindFriends } from './pages/FindFriends';
 
 import RequireAuth from './components/RequireAuth';
-import Registration from './components/Registration/registration';
+import Registration from './pages/Login/Registration/registration';
+import RegValidation from './pages/Login/RegValidation/validation';
+import RegSuccess from './pages/Login/RegSucces/succes';
 
 let userIsLoggedin = true;
 
@@ -53,13 +55,20 @@ function App() {
             <Routes>
                 {/* <RequireAuth> */}
                 <Route path="/" />
-                <Route path="/find-friends" element={<FindFriends />} />
+                <Route
+                    path="/find-friends"
+                    element={
+                        <RequireAuth>
+                            <FindFriends />
+                        </RequireAuth>
+                    }
+                />
                 <Route path="/signup" />
                 <Route
                     path="/posts"
                     element={
                         <RequireAuth>
-                            <PostsList />
+                            <Posts />
                         </RequireAuth>
                     }
                 />
@@ -81,7 +90,13 @@ function App() {
                 />
                 <Route path="/logout" />
                 {/* </RequireAuth> */}
-                <Route path="/login" element={<LogIn />} />
+                <Route
+                    path="/registration/validation"
+                    element={<RegValidation />}
+                />
+                <Route path="/registration/succes" element={<RegSuccess />} />
+                <Route path="/registration" element={<Registration />} />
+                <Route path="/login/" element={<LogIn />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>
