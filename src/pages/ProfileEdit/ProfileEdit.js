@@ -16,6 +16,7 @@ import {
     StyledFormEdit,
 } from './styles';
 import {
+    StyledInputFile,
     StyledInputHobbies,
     StyledInputText,
 } from '../../components/styledComponents/StyledInput';
@@ -45,7 +46,7 @@ export const ProfileEdit = () => {
     const [location, setLocation] = React.useState('');
     // const [phone, setPhone] = React.useState(currentUser.phone);
     const [about, setAbout] = React.useState('');
-    const [avatar, setAvatar] = React.useState('');
+    const [avatar, setAvatar] = React.useState({ image: '' });
     // const [password, setPassword] = React.useState(currentUser.password);
     // const [avatar, setAvatar] = React.useState(currentUser.avatar);
     // const [banner, setBanner] = React.useState(currentUser.banner);
@@ -61,21 +62,37 @@ export const ProfileEdit = () => {
         job: job,
         location: location,
         about_me: about,
+        avatar: avatar,
         // things_user_likes: thingsUserLikes,
     };
 
     // Methods
     const onLoad = () => {
-        // console.log('body at load', body);
         const payload = { token: `Bearer ${token}` };
         dispatch(getCurrentUser(payload));
     };
 
     const onSave = () => {
-        // console.log('saving changes...');
-        // console.log('body at save', body);
         const payload = { token: `Bearer ${token}`, body: updatedUser };
+        console.log('user body', updatedUser);
         dispatch(updateCurrentUser(payload));
+    };
+
+    const onUploadClick = (e) => {
+        console.log('uploading');
+        // console.log(e);
+    };
+
+    const onFileChange = (e) => {
+        // e.preventDefault(); // not submitting here
+        console.log(e.target.files);
+        const newAvatar = e.target.files['0'];
+        setAvatar(newAvatar);
+
+        console.log('avatar state', avatar);
+
+        // const formData = new FormData();
+        // formData.append('avatar', avatar);
     };
 
     // Component did mount
@@ -108,9 +125,15 @@ export const ProfileEdit = () => {
                 <StyledAvatarEdit>
                     <div id="update-image">
                         <img src={avatar} alt="profile picture" />
-                        <SecondaryButton onClick={() => {}}>
+                        {/* <SecondaryButton
+                            onClick={(e) => {
+                                onUploadClick(e);
+                            }}
+                            type="submit"
+                            htmlFor="fileUpload"
+                        >
                             update image
-                        </SecondaryButton>
+                        </SecondaryButton> */}
                     </div>
                     <div id="delete-save">
                         <SecondaryButton onClick={() => {}}>
@@ -186,6 +209,10 @@ export const ProfileEdit = () => {
                                 console.log(input);
                             }}
                         ></StyledInputHobbies> */}
+                        <StyledInputFile
+                            label="Update image"
+                            onChange={onFileChange}
+                        ></StyledInputFile>
                     </StyledFormEdit>
                 </StyledUserDetailsContainerEdit>
             </StyledProfileCardEdit>

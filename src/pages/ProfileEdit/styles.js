@@ -24,8 +24,6 @@ export const StyledAvatarEdit = styled.div`
     height: 100%;
     border-right: 2px solid #00000010;
 
-    /* #update-image,
-    #delete-save, */
     div {
         display: flex;
         flex-flow: column nowrap;
@@ -51,18 +49,13 @@ export const StyledAvatarEdit = styled.div`
     }
 `;
 
-export const StyledUserDetailsContainerEdit = styled.div`
-    /* height: 100%;
-    min-width: 400px; */
-`;
+export const StyledUserDetailsContainerEdit = styled.div``;
 
 export const StyledFormEdit = styled.form`
     width: 100%;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
-    /* display: column wrap; */
-    /* flex-grow: 1; */
 `;
 
 export const StyledHobbiesSectionEdit = styled.section`

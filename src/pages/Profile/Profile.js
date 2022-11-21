@@ -118,10 +118,10 @@ export const Profile = () => {
                                 <StyledHeader>Email</StyledHeader>
                                 <p>{email}</p>
                             </StyledItem>
-                            <StyledItem>
+                            {/* <StyledItem>
                                 <StyledHeader>Phone</StyledHeader>
                                 <p>123-456-7890</p>
-                            </StyledItem>
+                            </StyledItem> */}
                         </div>
                     </StyledContactSection>
                     <StyledHobbiesSection>
