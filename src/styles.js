@@ -1,3 +1,4 @@
+import { pureFinalPropsSelectorFactory } from 'react-redux/es/connect/selectorFactory';
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
@@ -126,5 +127,6 @@ nav > * + * {
 }
 
 box-sizing: border-box;
-
 `;
+
+//theme

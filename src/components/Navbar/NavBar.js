@@ -78,7 +78,9 @@ function NavBar(props) {
 
   return (
     <NavContainer>
-      <Link to="/">
+
+      <div>
+      <Link to='/'>
         <div>
           <img src={LogoNav} alt="logo"></img>
           <p>Motion</p>
@@ -98,8 +100,11 @@ function NavBar(props) {
           <p>Find Friends</p>
         </NavFriends>
       </Link>
+      </div>
 
-      <NavNotification>
+
+      <div>
+         <NavNotification>
         <img
           onClick={handleNotificationOpen}
           src={NotificationNav}
@@ -119,11 +124,14 @@ function NavBar(props) {
         </ProfileIcon>
       </Link>
 
-      {props.isLoggedIn === true && (
+      
         <Menu>
           <img src={MenuIcon} alt="icon-menu"></img>
         </Menu>
-      )}
+      
+      </div>
+
+     
     </NavContainer>
   );
 }
