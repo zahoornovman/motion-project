@@ -16,7 +16,7 @@ import NotFound from './components/NotFound/NotFound';
 import LogIn from './pages/Login/Login';
 import { Profile } from './pages/Profile/Profile';
 import { ProfileEdit } from './pages/ProfileEdit/ProfileEdit';
-import Posts from './components/Posts';
+import Posts from './components/PostsList';
 import { FindFriends } from './pages/FindFriends';
 
 import RequireAuth from './components/RequireAuth';
