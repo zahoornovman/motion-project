@@ -59,15 +59,14 @@ export const NavFriends = styled.div`
 
   p {
     margin-left: 17px;
-
   }
 `;
 
 export const NavNotification = styled.div`
   width: 84px;
   height: 80px;
-  margin-top: 33px;
-  margin-bottom: 29px;
+  /* margin-top: 33px;
+  margin-bottom: 29px; */
 
   display: flex;
   justify-content: center;
@@ -77,7 +76,7 @@ export const NavNotification = styled.div`
     border-bottom: 2px solid #ad73fd;
   }
 
-  div {
+  span {
     width: 21px;
     height: 21px;
     margin-top: 22px;
@@ -99,7 +98,9 @@ export const NavNotification = styled.div`
     /* identical to box height */
     text-align: center;
 
-    color: #ffffff;
+    color: black;
+
+    /* color: #ffffff; */
   }
 `;
 
