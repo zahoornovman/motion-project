@@ -41,8 +41,6 @@ const Login = () => {
     password: "",
   });
 
-  console.log(user);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     await dispatch(loginUser(user));

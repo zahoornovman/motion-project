@@ -103,6 +103,37 @@ export const NavNotification = styled.div`
   }
 `;
 
+export const StyledNavDropdown = styled.div`
+  ul {
+    position: absolute;
+    top: 80px;
+    list-style-type: none;
+    margin: 5px 0;
+    padding: 10px 10px;
+
+    border: 1px solid rgb(247, 243, 243);
+    width: 400px;
+  }
+
+  li {
+    margin: 0;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+
+    img {
+      width: 40px;
+      height: 40px;
+      border: solid red 1px;
+      border-radius: 50%;
+    }
+  }
+
+  li:hover {
+    background-color: lightgray;
+  }
+`;
+
 export const ProfileIcon = styled.div`
   width: 84px;
   height: 80px;

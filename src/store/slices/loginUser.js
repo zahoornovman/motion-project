@@ -9,28 +9,55 @@ export const loginUser = createAsyncThunk("user/login", async (payload) => {
   return data;
 }); //catch(error) ??
 
-const initialState = {
-  email: "",
-  username: "",
-  password: "",
-  firstName: "",
-  lastName: "",
-  token: "",
-  refresh: "",
-  loading: null,
-  error: "",
-};
-
 const userSlice = createSlice({
   name: "user",
-  initialState,
-  reducers: {},
+  initialState: {
+    email: "",
+    username: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    id: null,
+    token: "",
+    refresh: "",
+    loading: null,
+    error: "",
+    notifications: {
+      count: 20,
+      received: [],
+      requested: [],
+      next: null,
+      previous: null,
+      error: "",
+    },
+  },
+  reducers: {
+    getNotifications: (state, action) => {
+      console.log(action.payload);
+      state.notifications.count = action.payload.count;
+      state.notifications.next = action.payload.next;
+      state.notifications.previous = action.payload.previous;
+      //logic to segregate friends requests received from friend requests sent
+      const list = action.payload.results;
+      const copyReceived = list.filter((item) => item.receiver.id == state.id);
+      state.notifications.received = copyReceived;
+      const copyRequested = list.filter(
+        (item) => item.requester.id == state.id
+      );
+      state.notifications.requested = copyRequested;
+    },
+    setNotificationError: (state, action) => {
+      state.error = action.payload.details;
+      console.log(state.error);
+    },
+  },
   extraReducers: {
     [loginUser.pending]: (state) => {
       state.loading = "loading";
     },
     [loginUser.fulfilled]: (state, action) => {
       state.loading = "loading complete";
+      state.id = action.payload.user.id;
       state.email = action.payload.user.email;
       state.username = action.payload.user.loginUser;
       state.password = action.meta.arg.password;
@@ -45,8 +72,22 @@ const userSlice = createSlice({
   },
 });
 
+const getNotifications = userSlice.actions.getNotifications;
+const setNotificationError = userSlice.actions.setNotificationError;
+
 const selectUserToken = (store) => store.user.token;
+const selectNotificationCount = (store) => store.user.notifications.count;
+const selectNotificationsReceived = (store) =>
+  store.user.notifications.received;
+const selectNotificationsRequested = (store) =>
+  store.user.notifications.requested;
 
 export default userSlice.reducer;
-export { selectUserToken }
-
+export { selectUserToken };
+export {
+  getNotifications,
+  setNotificationError,
+  selectNotificationCount,
+  selectNotificationsReceived,
+  selectNotificationsRequested,
+};
