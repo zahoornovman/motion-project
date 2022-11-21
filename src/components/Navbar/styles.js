@@ -59,15 +59,14 @@ export const NavFriends = styled.div`
 
   p {
     margin-left: 17px;
-
   }
 `;
 
 export const NavNotification = styled.div`
   width: 84px;
   height: 80px;
-  margin-top: 33px;
-  margin-bottom: 29px;
+  /* margin-top: 33px;
+  margin-bottom: 29px; */
 
   display: flex;
   justify-content: center;
@@ -77,7 +76,7 @@ export const NavNotification = styled.div`
     border-bottom: 2px solid #ad73fd;
   }
 
-  div {
+  span {
     width: 21px;
     height: 21px;
     margin-top: 22px;
@@ -99,38 +98,9 @@ export const NavNotification = styled.div`
     /* identical to box height */
     text-align: center;
 
-    color: #ffffff;
-  }
-`;
+    color: black;
 
-export const StyledNavDropdown = styled.div`
-  ul {
-    position: absolute;
-    top: 80px;
-    list-style-type: none;
-    margin: 5px 0;
-    padding: 10px 10px;
-
-    border: 1px solid rgb(247, 243, 243);
-    width: 400px;
-  }
-
-  li {
-    margin: 0;
-    background-color: white;
-    display: flex;
-    justify-content: space-between;
-
-    img {
-      width: 40px;
-      height: 40px;
-      border: solid red 1px;
-      border-radius: 50%;
-    }
-  }
-
-  li:hover {
-    background-color: lightgray;
+    /* color: #ffffff; */
   }
 `;
 

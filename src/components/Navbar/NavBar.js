@@ -78,60 +78,52 @@ function NavBar(props) {
 
   return (
     <NavContainer>
-
       <div>
-      <Link to='/'>
-        <div>
-          <img src={LogoNav} alt="logo"></img>
-          <p>Motion</p>
-        </div>
-      </Link>
+        <Link to="/">
+          <div>
+            <img src={LogoNav} alt="logo"></img>
+            <p>Motion</p>
+          </div>
+        </Link>
 
-      <Link to="/posts">
-        <NavPost>
-          <img src={PostNav} alt="icon-post"></img>
-          <p>Post</p>
-        </NavPost>
-      </Link>
+        <Link to="/posts">
+          <NavPost>
+            <img src={PostNav} alt="icon-post"></img>
+            <p>Post</p>
+          </NavPost>
+        </Link>
 
-      <Link to="/find-friends">
-        <NavFriends>
-          <img src={FriendsNav} alt="icon-friends"></img>
-          <p>Find Friends</p>
-        </NavFriends>
-      </Link>
+        <Link to="/find-friends">
+          <NavFriends>
+            <img src={FriendsNav} alt="icon-friends"></img>
+            <p>Find Friends</p>
+          </NavFriends>
+        </Link>
       </div>
 
-
       <div>
-         <NavNotification>
-        <img
-          onClick={handleNotificationOpen}
-          src={NotificationNav}
-          alt="icon-notification"
-        />
-        <StyledNavDropdown>
-          {open === true ? <NotificationsDropdown /> : null}
-        </StyledNavDropdown>
-        <div>
-          <p>{count}</p>
-        </div>
-      </NavNotification>
+        <NavNotification>
+          <div>{open === true ? <NotificationsDropdown /> : null}</div>
+          <img
+            onClick={handleNotificationOpen}
+            src={NotificationNav}
+            alt="icon-notification"
+          />
+          <span>
+            <p>{count}</p>
+          </span>
+        </NavNotification>
 
-      <Link to="/profile">
-        <ProfileIcon>
-          <img src={ProfilePic} alt="icon-profile" />
-        </ProfileIcon>
-      </Link>
+        <Link to="/profile">
+          <ProfileIcon>
+            <img src={ProfilePic} alt="icon-profile" />
+          </ProfileIcon>
+        </Link>
 
-      
         <Menu>
           <img src={MenuIcon} alt="icon-menu"></img>
         </Menu>
-      
       </div>
-
-     
     </NavContainer>
   );
 }
