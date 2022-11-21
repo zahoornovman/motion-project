@@ -23,7 +23,8 @@ export const NavContainer = styled.nav`
 
   div {
     display: flex;
-    margin-left: 40px;
+    align-items: center;
+    margin-left: 25px;
   }
 `;
 
@@ -58,6 +59,7 @@ export const NavFriends = styled.div`
 
   p {
     margin-left: 17px;
+
   }
 `;
 

@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const newUserInfoValidation = createAsyncThunk(
+export const validationUser = createAsyncThunk(
   "userValidation",
   async (payload, { rejectWithValue }) => {
     try {
@@ -23,20 +23,19 @@ const initialState = {
   errorCode: "",
 };
 
-const newUserValidation = createSlice({
-  name: "newUserValidation",
+const validationSlice = createSlice({
+  name: "validation",
   initialState,
-
   reducers: {},
   extraReducers: {
-    [newUserInfoValidation.pending]: (state) => {
+    [validationUser.pending]: (state) => {
       state.status = "loading";
     },
-    [newUserInfoValidation.fulfilled]: (state, action) => {
+    [validationUser.fulfilled]: (state, action) => {
       console.log(action);
       state.status = "loading complete";
     },
-    [newUserInfoValidation.rejected]: (state, action) => {
+    [validationUser.rejected]: (state, action) => {
       state.errorUserName = action.payload.username;
       state.errorCode = action.payload.code;
       state.status = "status error";
@@ -44,4 +43,5 @@ const newUserValidation = createSlice({
   },
 });
 
-export default newUserValidation.reducer;
+export default validationSlice.reducer;
+
