@@ -18,7 +18,6 @@ export const fetchPosts = createAsyncThunk(
       );
 
       return data.results.map((post) => post);
-
     } catch (err) {
       console.log(err);
     }
@@ -26,34 +25,29 @@ export const fetchPosts = createAsyncThunk(
 );
 
 export const addNewPost = createAsyncThunk(
-  'posts/addNewPost',
-    // The payload creator receives the partial `{title, content, user}` object
-  
+  "posts/addNewPost",
   async (payload) => {
     console.log(payload);
-    payload = JSON.stringify({
-      "user": {
-        "email": "michael.zolliker@gmail.com",
-        "username": "michaelzolliker"
-      },
-      "content": "michael test"
+    let raw = JSON.stringify({
+      content: `${payload}`,
     });
     console.log(payload);
-    
+
     try {
       const { data } = await axios.post(
-        'https://motion.propulsion-home.ch/backend/api/social/posts/',
+        "https://motion.propulsion-home.ch/backend/api/social/posts/",
+        raw,
         {
           headers: {
             Authorization:
               "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY5MTE1NzI4LCJqdGkiOiI2YjJiMGYwNjllZTA0NGJiYTdlNzIzNjBlZGQ5Yjk5MCIsInVzZXJfaWQiOjE5OTF9.y0MGJbv6n6cSr2cQ70VWFMA73PuScw6pMoviJ-J_PI8",
+            "Content-Type": "application/json",
           },
         },
         payload
       );
 
       return data;
-
     } catch (err) {
       console.log(err);
     }
@@ -69,8 +63,7 @@ const initialState = {
 const postsSlice = createSlice({
   name: "posts",
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(fetchPosts.pending, (state, action) => {
@@ -87,7 +80,7 @@ const postsSlice = createSlice({
       })
       .addCase(addNewPost.fulfilled, (state, action) => {
         // We can directly add the new post object to our posts array
-        state.posts.push(action.payload)
+        state.posts.push(action.payload);
       });
   },
 });
