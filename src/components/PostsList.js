@@ -34,7 +34,7 @@ const PostExcerpt = ({ post }) => {
   );
 };
 
-export function Posts() {
+export function PostsList() {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.posts);
 
@@ -76,4 +76,4 @@ export function Posts() {
   );
 }
 
-export default Posts;
+export default PostsList;
