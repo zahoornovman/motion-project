@@ -1,5 +1,5 @@
 //libraries
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -9,8 +9,11 @@ import { selectUserToken } from "../../store/slices/loginUser";
 import {
   selectNotificationCount,
   getNotifications,
-  setError,
-} from "../../store/slices/notifications";
+  setNotificationError,
+} from "../../store/slices/loginUser";
+
+//other components
+import { NotificationsDropdown } from "../Notifications/NotificationsDropdown";
 
 //styledComponents
 import {
@@ -20,6 +23,7 @@ import {
   NavPost,
   ProfileIcon,
   Menu,
+  StyledNavDropdown,
 } from "./styles";
 
 //images and svgs
@@ -35,22 +39,27 @@ function NavBar(props) {
   const navigate = useNavigate();
   const count = useSelector(selectNotificationCount);
 
+  const [open, setOpen] = useState(false);
+
+  const handleNotificationOpen = () => {
+    setOpen(!open);
+  };
 
   let token = useSelector(selectUserToken);
   console.log(token);
   if (token === "") {
     token =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY4ODcyOTU1LCJqdGkiOiIyMWM2NGZmNDA1YTk0MDllYjk0N2ZjYTAyYzI1ODAxNiIsInVzZXJfaWQiOjE5NzN9.NiwT2veTN1-uEoU8B1GaxW_41lMRREc1JsLmYickftI";
+      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY5MTUzMDcxLCJqdGkiOiIwYTVjMWQwZDgyOWQ0NTEwYTk2NzM2MzcyM2IxYzFkZSIsInVzZXJfaWQiOjE5NzN9.p_MjxCu6wcaCUkd542JN6tdRPqEM-pEA5tc0_EPmF1I";
     console.log("Hard Coded token used");
   } else {
-    console.log('store token used');
-
+    console.log("store token used");
   }
 
   useEffect(() => {
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
+    console.log("use Effect NaveBar for notifications");
 
     var requestOptions = {
       method: "GET",
@@ -64,10 +73,8 @@ function NavBar(props) {
     )
       .then((response) => response.json())
       .then((result) => dispatch(getNotifications(result)))
-      .catch((error) => dispatch(setError(error)));
+      .catch((error) => dispatch(setNotificationError(error)));
   }, [token]);
-
-  console.log()
 
   return (
     <NavContainer>
@@ -93,7 +100,14 @@ function NavBar(props) {
       </Link>
 
       <NavNotification>
-        <img src={NotificationNav} alt="icon-notification" />
+        <img
+          onClick={handleNotificationOpen}
+          src={NotificationNav}
+          alt="icon-notification"
+        />
+        <StyledNavDropdown>
+          {open === true ? <NotificationsDropdown /> : null}
+        </StyledNavDropdown>
         <div>
           <p>{count}</p>
         </div>
