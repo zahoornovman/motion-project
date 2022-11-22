@@ -152,7 +152,7 @@ function NotificationsDropdown() {
     <StyledNavDropdown>
       <h3>Received requests</h3>
 
-      {!receivedNotificationsParsed ? <div>No Friend Requests</div> : null}
+      {(receivedNotificationsParsed === []) && <div>No Friend Requests</div>}
       {receivedNotificationsParsed.map((item) => (
         <div key={item.id}>
           <img
@@ -171,7 +171,7 @@ function NotificationsDropdown() {
       ))}
 
       <h3>Sent requests</h3>
-      {!requestedNotificationsParsed ? <div>No Sent Requests</div> : null}
+      {(requestedNotificationsParsed === []) && <div>No Sent Requests</div> }
       {requestedNotificationsParsed.map((item) => (
         <div key={item.id}>
           <img
