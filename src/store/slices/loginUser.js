@@ -62,6 +62,13 @@ const userSlice = createSlice({
         }
       );
     },
+    updateRemainingNotifications: (state, {payload}) => {
+      state.notifications.received = state.notifications.received.filter(
+        (obj) => {
+          return obj.id !== parseInt(payload);
+        }
+      );
+    }
   },
   extraReducers: {
     [loginUser.pending]: (state) => {
@@ -87,6 +94,7 @@ const userSlice = createSlice({
 const getNotifications = userSlice.actions.getNotifications;
 const setNotificationError = userSlice.actions.setNotificationError;
 const deleteFriendRequest = userSlice.actions.deleteFriendRequest;
+const updateRemainingNotifications = userSlice.actions.updateRemainingNotifications;
 
 const selectUserToken = (store) => store.user.token;
 const selectNotificationCount = (store) => store.user.notifications.count;
@@ -101,6 +109,7 @@ export {
   getNotifications,
   setNotificationError,
   deleteFriendRequest,
+  updateRemainingNotifications,
   selectNotificationCount,
   selectNotificationsReceived,
   selectNotificationsRequested,
