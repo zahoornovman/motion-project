@@ -61,14 +61,16 @@ const userSlice = createSlice({
           return obj.id !== parseInt(payload);
         }
       );
+      state.notifications.count -= 1;
     },
-    updateRemainingNotifications: (state, {payload}) => {
+    updateRemainingNotifications: (state, { payload }) => {
       state.notifications.received = state.notifications.received.filter(
         (obj) => {
           return obj.id !== parseInt(payload);
         }
       );
-    }
+      state.notifications.count -= 1;
+    },
   },
   extraReducers: {
     [loginUser.pending]: (state) => {
@@ -94,7 +96,8 @@ const userSlice = createSlice({
 const getNotifications = userSlice.actions.getNotifications;
 const setNotificationError = userSlice.actions.setNotificationError;
 const deleteFriendRequest = userSlice.actions.deleteFriendRequest;
-const updateRemainingNotifications = userSlice.actions.updateRemainingNotifications;
+const updateRemainingNotifications =
+  userSlice.actions.updateRemainingNotifications;
 
 const selectUserToken = (store) => store.user.token;
 const selectNotificationCount = (store) => store.user.notifications.count;

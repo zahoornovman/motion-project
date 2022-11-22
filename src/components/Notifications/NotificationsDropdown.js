@@ -60,7 +60,34 @@ function NotificationsDropdown() {
   }
 
   //rejecting friend request
-  const handleReject = (e) => {};
+  const handleReject = (e) => {
+    console.log("entering Reject");
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Accept", "application/json");
+    myHeaders.append("Authorization", `Bearer ${token}`);
+
+    let raw = JSON.stringify({
+      status: "R",
+    });
+
+    let requestOptions = {
+      method: "PATCH",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch(
+      `https://motion.propulsion-home.ch/backend/api/social/friends/requests/${e.target.id}/`,
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .then(() => dispatch(updateRemainingNotifications(e.target.id)))
+      .catch((error) => console.log("error", error));
+  };
 
   //function to accept friends request
   const handleAccept = (e) => {
@@ -157,7 +184,9 @@ function NotificationsDropdown() {
           </div>
           <div>
             <img src={PendingLogo} alt="Pen" />
-            <button id={item.id} onClick={handleDelete}>Delete</button>
+            <button id={item.id} onClick={handleDelete}>
+              Delete
+            </button>
             {/* <img id={item.id} onClick={handleDelete} src={Reject} alt="R" /> */}
           </div>
         </div>
