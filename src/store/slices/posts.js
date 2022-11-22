@@ -11,7 +11,7 @@ export const fetchPosts = createAsyncThunk(
         {
           headers: {
             Authorization:
-              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY5MTE1NzI4LCJqdGkiOiI2YjJiMGYwNjllZTA0NGJiYTdlNzIzNjBlZGQ5Yjk5MCIsInVzZXJfaWQiOjE5OTF9.y0MGJbv6n6cSr2cQ70VWFMA73PuScw6pMoviJ-J_PI8",
+              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY5MzEwODEwLCJqdGkiOiJmNjdkMzg2YTYyOTA0MGI5ODBiNGFhYjBlZmU0MjdhOCIsInVzZXJfaWQiOjE5OTF9.3hcDgJKxCPs_QCaDQS__bFJIWg68B3nXKQwAjVUZ3Go",
           },
         },
         payload
