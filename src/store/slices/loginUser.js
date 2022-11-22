@@ -39,10 +39,10 @@ const userSlice = createSlice({
       state.notifications.previous = action.payload.previous;
       //logic to segregate friends requests received from friend requests sent
       const list = action.payload.results;
-      const copyReceived = list.filter((item) => item.receiver.id == state.id);
+      const copyReceived = list.filter((item) => item.receiver.id === state.id);
       state.notifications.received = copyReceived;
       const copyRequested = list.filter(
-        (item) => item.requester.id == state.id
+        (item) => item.requester.id === state.id
       );
       state.notifications.requested = copyRequested;
     },
