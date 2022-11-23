@@ -33,7 +33,6 @@ export const StyledAvatarEdit = styled.div`
     }
 
     img {
-        /* height: 100px; */
         width: 100px;
         margin: auto 0px 20px 0px;
         border-radius: 50%;

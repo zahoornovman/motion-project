@@ -23,6 +23,7 @@ import {
     SecondaryButton,
     PrimaryButton,
 } from '../../components/styledComponents/StyledButtons';
+import { StyledHobbiesIcon } from '../../components/styledComponents/StyledHobbies';
 
 // Component
 export const Profile = () => {
@@ -34,14 +35,14 @@ export const Profile = () => {
     const dispatch = useDispatch();
 
     // State
-    const [id, setId] = React.useState('');
+    // const [id, setId] = React.useState('');
+    // const [username, setUsername] = React.useState('');
+    // const [job, setJob] = React.useState('');
+    // const [phone, setPhone] = React.useState(currentUser.phone);
     const [firstName, setFirstName] = React.useState('');
     const [lastName, setLastName] = React.useState('');
     const [email, setEmail] = React.useState('');
-    const [username, setUsername] = React.useState('');
-    const [job, setJob] = React.useState('');
     const [location, setLocation] = React.useState('');
-    // const [phone, setPhone] = React.useState(currentUser.phone);
     const [about, setAbout] = React.useState('');
     const [avatar, setAvatar] = React.useState('');
     const [banner, setBanner] = React.useState('');
@@ -54,7 +55,6 @@ export const Profile = () => {
 
     // Methods
     const onLoad = () => {
-        // console.log('body at load', body);
         const payload = { token: `Bearer ${token}` };
         dispatch(getCurrentUser(payload));
     };
@@ -66,11 +66,11 @@ export const Profile = () => {
 
     // When store changes
     useEffect(() => {
-        setId(currentUser.id);
+        // setId(currentUser.id);
+        // setUsername(currentUser.username);
         setFirstName(currentUser.first_name);
         setLastName(currentUser.last_name);
         setEmail(currentUser.email);
-        setUsername(currentUser.username);
         setLocation(currentUser.location);
         setAbout(currentUser.about_me);
         setAvatar(currentUser.avatar);
@@ -81,6 +81,8 @@ export const Profile = () => {
         setAmountOfFriends(currentUser.amount_of_friends);
         setAmountOfFollowers(currentUser.amount_of_followers);
         setAmountFollowing(currentUser.amount_following);
+
+        console.log(thingsUserLikes);
     }, [currentUser]);
 
     return (
@@ -121,11 +123,16 @@ export const Profile = () => {
                     <StyledHobbiesSection>
                         <div className="preferences">
                             <StyledHeader>Things I like</StyledHeader>
-                            <div className="list">
-                                {thingsUserLikes.map((hobby) => {
-                                    <p>{Object.values(hobby)}</p>;
+                            <div>
+                                {thingsUserLikes.map((hobby, index) => {
+                                    return (
+                                        <StyledHobbiesIcon key={index}>
+                                            {hobby}
+                                        </StyledHobbiesIcon>
+                                    );
                                 })}
                             </div>
+                            <div className="list"></div>
                         </div>
                     </StyledHobbiesSection>
                 </StyledTopContainer>

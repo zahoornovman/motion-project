@@ -21,7 +21,7 @@ export const StyledHobbiesIcon = styled.button`
     mix-blend-mode: normal;
 
     margin: 10px 5px;
-    padding: 3px 20px;
+    padding: 3px 15px;
 
     box-sizing: content-box;
 

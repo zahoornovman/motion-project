@@ -1,5 +1,5 @@
 // Libraries
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -37,6 +37,7 @@ export const ProfileEdit = () => {
     const currentUser = useSelector((state) => state.currentUser);
     const token = useSelector(selectUserToken);
     const dispatch = useDispatch();
+    const inputRef = useRef(null);
 
     // State
     const [userStatus, setUserStatus] = React.useState(currentUser.status);
@@ -73,24 +74,37 @@ export const ProfileEdit = () => {
         dispatch(getCurrentUser(payload));
     };
 
-    const onSave = () => {
-        console.log('thingsUserLikes', thingsUserLikes);
-        if (typeof updatedUser.avatar !== 'file') delete updatedUser.avatar;
-        console.log('updatedUser', updatedUser);
-        const payload = { token: `Bearer ${token}`, body: updatedUser };
-        dispatch(updateCurrentUser(payload));
-    };
-
-    // const onUploadClick = (e) => {
-    //     console.log('uploading');
-    // };
-
     const onFileChange = (e) => {
         console.log(e.target.files);
         const newAvatar = e.target.files['0'];
         setAvatar(newAvatar);
         // console.log('avatar state', avatar);
     };
+
+    const onSave = () => {
+        if (typeof updatedUser.avatar !== 'file') delete updatedUser.avatar;
+        const payload = { token: `Bearer ${token}`, body: updatedUser };
+        dispatch(updateCurrentUser(payload));
+    };
+
+    const addHobbies = (e) => {
+        e.preventDefault();
+        const newHobbies = hobbiesInput.split(',');
+        setThingsUserLikes([...thingsUserLikes, ...newHobbies]);
+        setHobbiesInput([]);
+    };
+
+    const removeHobby = (e) => {
+        e.preventDefault();
+        const currentHobbies = [...thingsUserLikes];
+        const targetHobby = e.target.innerHTML;
+        currentHobbies.splice(currentHobbies.indexOf(targetHobby), 1);
+        setThingsUserLikes(currentHobbies);
+    };
+
+    // const onUploadClick = (e) => {
+    //     console.log('uploading');
+    // };
 
     // Component did mount
     useEffect(() => {
@@ -123,15 +137,16 @@ export const ProfileEdit = () => {
                     <div id="update-image">
                         <img src={avatar} alt="profile picture" />
 
-                        {/* <SecondaryButton
+                        <SecondaryButton
                             onClick={(e) => {
-                                onUploadClick(e);
+                                e.preventDefault();
+                                inputRef.current.click();
                             }}
                             type="submit"
                             htmlFor="fileUpload"
                         >
                             update image
-                        </SecondaryButton> */}
+                        </SecondaryButton>
                     </div>
                     <div id="delete-save">
                         <SecondaryButton onClick={() => {}}>
@@ -199,6 +214,7 @@ export const ProfileEdit = () => {
                         <StyledInputFile
                             label="Update image"
                             onChange={onFileChange}
+                            reference={inputRef}
                         ></StyledInputFile>
                         <StyledInputTextHobbies
                             label="Things I like"
@@ -208,21 +224,12 @@ export const ProfileEdit = () => {
                             onChange={(e) => {
                                 const input = e.target.value;
                                 setHobbiesInput(input);
-                                console.log(hobbiesInput);
                             }}
                             onClick={(e) => {
-                                e.preventDefault();
-                                const newHobbies = hobbiesInput.split(',');
-                                console.log('new hobbies', newHobbies);
-                                setThingsUserLikes([
-                                    ...thingsUserLikes,
-                                    ...newHobbies,
-                                ]);
-                                setHobbiesInput([]);
+                                addHobbies(e);
                             }}
                             removeHobby={(e) => {
-                                e.preventDefault();
-                                console.log('remove');
+                                removeHobby(e);
                             }}
                         />
                     </StyledFormEdit>
