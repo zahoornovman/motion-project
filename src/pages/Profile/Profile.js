@@ -24,9 +24,6 @@ import {
     PrimaryButton,
 } from '../../components/styledComponents/StyledButtons';
 
-// Assets
-import Jenniffer from '../../assets/images/users/jennifer.png';
-
 // Component
 export const Profile = () => {
     const navigate = useNavigate();
@@ -37,7 +34,6 @@ export const Profile = () => {
     const dispatch = useDispatch();
 
     // State
-    // const [userStatus, setUserStatus] = React.useState(currentUser.status);
     const [id, setId] = React.useState('');
     const [firstName, setFirstName] = React.useState('');
     const [lastName, setLastName] = React.useState('');
@@ -49,9 +45,7 @@ export const Profile = () => {
     const [about, setAbout] = React.useState('');
     const [avatar, setAvatar] = React.useState('');
     const [banner, setBanner] = React.useState('');
-    const [thingsUserLikes, setThingsUserLikes] = React.useState(
-        currentUser.things_user_likes
-    );
+    const [thingsUserLikes, setThingsUserLikes] = React.useState([]);
     const [amountOfPosts, setAmountOfPosts] = React.useState('');
     const [amountOfLikes, setAmountOfLikes] = React.useState('');
     const [amountOfFriends, setAmountOfFriends] = React.useState('');
