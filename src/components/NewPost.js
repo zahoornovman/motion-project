@@ -1,46 +1,61 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectUserToken } from '../store/slices/loginUser';
-// import { addPost } from '../store/slices/posts';
-import { addNewPost } from '../store/slices/posts';
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserToken } from "../store/slices/loginUser";
+import { addNewPost } from "../store/slices/posts";
+import { StyledInputFile } from "./styledComponents/StyledInput";
 
 function NewPost() {
-    const [newPost, setNewPost] = useState('');
-    const dispatch = useDispatch();
-    const body = { newPost: newPost, token: useSelector(selectUserToken) };
+  const [newPostText, setNewPostText] = useState("");
+  // const [newPostImage, setNewPostImage] = useState("");
+  const [newPostImage, setNewPostImage] = useState({ image: "" });
+  const dispatch = useDispatch();
+  const body = {
+    newPostText: newPostText,
+    newPostImage: newPostImage,
+    token: useSelector(selectUserToken),
+  };
 
-    const handleAddPost = (e) => {
-        e.preventDefault();
-        // creates the dispatch action into a variable for easy reading
-        // const action = addPost(newPost);
-        // dispatch(addPost(newPost));
-        dispatch(addNewPost(body));
+  const handleAddPost = (e) => {
+    e.preventDefault();
+    dispatch(addNewPost(body));
 
-        // dispatch(addNewPost({ title, content, user: userId })).unwrap()
+    // cleanes the local state
+    setNewPostText("");
+    setNewPostImage("");
+  };
 
-        // cleanes the local state
-        setNewPost('');
-    };
+  const handleNewPostChange = (e) => {
+    const newPostText = e.currentTarget.value;
+    // sets the state with the input
+    setNewPostText(newPostText);
+  };
 
-    const handleNewPostChange = (e) => {
-        const newPost = e.currentTarget.value;
-        // sets the state with the input
-        setNewPost(newPost);
-    };
+  const onFileChange = (e) => {
+    // e.preventDefault(); // not submitting here
+    console.log(e.target.files);
+    const newPostImage = e.target.files["0"];
+    setNewPostImage(newPostImage);
 
-    return (
-        <div className="NewPost">
-            <form onSubmit={handleAddPost}>
-                <input
-                    type="text"
-                    placeholder="Your next post"
-                    value={newPost}
-                    onChange={handleNewPostChange}
-                />
-                <input type="submit" value={'Add'} />
-            </form>
-        </div>
-    );
+    console.log("image state", newPostImage);
+  };
+
+  return (
+    <div className="NewPost">
+      <form onSubmit={handleAddPost}>
+        <input
+          type="text"
+          placeholder="Your next post"
+          value={newPostText}
+          onChange={handleNewPostChange}
+        />
+        <StyledInputFile
+          label="Upload image"
+          onChange={onFileChange}
+        ></StyledInputFile>
+        <input type="submit" value={"Add"} />
+      </form>
+    </div>
+  );
 }
 
 export { NewPost };
