@@ -1,6 +1,6 @@
 //libraries
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
@@ -37,7 +37,7 @@ import MenuIcon from "../../assets/svgs/menu.svg";
 function NavBar(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const count = useSelector(selectNotificationCount);
+  const location = useLocation();
 
   const [open, setOpen] = useState(false);
 
@@ -45,21 +45,13 @@ function NavBar(props) {
     setOpen(!open);
   };
 
+  const count = useSelector(selectNotificationCount);
   let token = useSelector(selectUserToken);
-  console.log(token);
-  if (token === "") {
-    token =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY5MTUzMDcxLCJqdGkiOiIwYTVjMWQwZDgyOWQ0NTEwYTk2NzM2MzcyM2IxYzFkZSIsInVzZXJfaWQiOjE5NzN9.p_MjxCu6wcaCUkd542JN6tdRPqEM-pEA5tc0_EPmF1I";
-    console.log("Hard Coded token used");
-  } else {
-    console.log("store token used");
-  }
 
   useEffect(() => {
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
-    console.log("use Effect NaveBar for notifications");
 
     var requestOptions = {
       method: "GET",
@@ -74,7 +66,7 @@ function NavBar(props) {
       .then((response) => response.json())
       .then((result) => dispatch(getNotifications(result)))
       .catch((error) => dispatch(setNotificationError(error)));
-  }, [token]);
+  }, [location]);
 
   return (
     <NavContainer>
@@ -102,10 +94,9 @@ function NavBar(props) {
       </div>
 
       <div>
-        <NavNotification>
+        <NavNotification onClick={handleNotificationOpen}>
           <div>{open === true ? <NotificationsDropdown /> : null}</div>
-          <img
-            onClick={handleNotificationOpen}
+          <img           
             src={NotificationNav}
             alt="icon-notification"
           />

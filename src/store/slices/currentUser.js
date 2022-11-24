@@ -13,8 +13,7 @@ export const getCurrentUser = createAsyncThunk(
                     headers: {
                         Authorization: payload.token,
                     },
-                },
-                payload.body
+                }
             );
             return data;
         } catch (err) {
@@ -36,7 +35,8 @@ export const updateCurrentUser = createAsyncThunk(
                 {
                     headers: {
                         Authorization: payload.token,
-                        'Content-Type': 'multipart/form-data',
+                        // 'Content-Type': 'multipart/form-data',
+                        'Content-Type': 'application/json',
                     },
                 }
             );
@@ -58,11 +58,7 @@ const initialState = {
     banner: '',
     location: '',
     about_me: '',
-    things_user_likes: [
-        {
-            keyword: '',
-        },
-    ],
+    things_user_likes: [],
     logged_in_user_is_following: '',
     logged_in_user_is_friends: '',
     logged_in_user_is_rejected: '',
@@ -132,17 +128,6 @@ const currentUser = createSlice({
                 state.amount_of_followers = amount_of_followers;
                 state.amount_following = amount_following;
                 state.things_user_likes = things_user_likes;
-                // state.things_user_likes = [
-                //     {
-                //         keyword: 'strings',
-                //     },
-                //     {
-                //         keyword: 'coding',
-                //     },
-                //     {
-                //         keyword: 'react',
-                //     },
-                // ];
             })
 
             .addCase(getCurrentUser.rejected, (state, action) => {

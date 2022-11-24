@@ -25,9 +25,12 @@ export const StyledAvatar = styled.div`
     border-right: 2px solid #00000010;
 
     img {
-        height: 100px;
         width: 100px;
-        margin: auto 0px 6px 0px;
+        margin: auto 0px 20px 0px;
+        border-radius: 50%;
+        // fix streching
+        object-fit: cover;
+        object-position: center;
     }
 
     #name {
@@ -49,7 +52,7 @@ export const StyledUserDetailsContainer = styled.div`
     width: 100%;
 `;
 export const StyledTopContainer = styled.div`
-    max-height: 70%;
+    min-height: 70%;
     display: flex;
     border-bottom: 2px solid #00000010;
     border-top: 2px solid #00000000;
@@ -59,7 +62,8 @@ export const StyledContactSection = styled.section`
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
-    margin: 40px 30px 30px;
+    margin: 40px auto 40px auto;
+    max-width: 50%;
 
     #about {
         line-height: 26px;
@@ -90,22 +94,8 @@ export const StyledHobbiesSection = styled.section`
     display: flex;
     flex-flow: column;
     justify-content: flex-start;
-    margin: 40px 30px 30px;
-
-    div {
-        display: flex;
-        flex-flow: row wrap;
-        width: 100%;
-        margin: 16px 0%;
-        p {
-            margin: 5px;
-            padding: 8px;
-            background-color: lightgray;
-            background: #00000005;
-            border: 1px solid #00000005;
-            border-radius: 18px;
-        }
-    }
+    margin: 40px auto 40px auto;
+    max-width: 50%;
 `;
 
 export const StyledStatsContainer = styled.div`

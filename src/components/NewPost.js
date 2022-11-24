@@ -7,29 +7,41 @@ import { ProfileIcon } from "./Navbar/styles";
 import { PostSection, ProfilePost } from "./styledPosts/styles";
 import ProfilePic from "../assets/images/users/jennifer.png";
 import SendBtn from '../assets/svgs/send_button.svg';
+import { StyledInputFile } from "./styledComponents/StyledInput";
 
 function NewPost() {
-  const [newPost, setNewPost] = useState("");
+  const [newPostText, setNewPostText] = useState("");
+  // const [newPostImage, setNewPostImage] = useState("");
+  const [newPostImage, setNewPostImage] = useState({ image: "" });
   const dispatch = useDispatch();
-  const body = { newPost: newPost, token: useSelector(selectUserToken) };
+  const body = {
+    newPostText: newPostText,
+    newPostImage: newPostImage,
+    token: useSelector(selectUserToken),
+  };
 
   const handleAddPost = (e) => {
     e.preventDefault();
-    // creates the dispatch action into a variable for easy reading
-    // const action = addPost(newPost);
-    // dispatch(addPost(newPost));
     dispatch(addNewPost(body));
 
-    // dispatch(addNewPost({ title, content, user: userId })).unwrap()
-
     // cleanes the local state
-    setNewPost("");
+    setNewPostText("");
+    setNewPostImage("");
   };
 
   const handleNewPostChange = (e) => {
-    const newPost = e.currentTarget.value;
+    const newPostText = e.currentTarget.value;
     // sets the state with the input
-    setNewPost(newPost);
+    setNewPostText(newPostText);
+  };
+
+  const onFileChange = (e) => {
+    // e.preventDefault(); // not submitting here
+    console.log(e.target.files);
+    const newPostImage = e.target.files["0"];
+    setNewPostImage(newPostImage);
+
+    console.log("image state", newPostImage);
   };
 
   return (
@@ -41,9 +53,13 @@ function NewPost() {
         <input
           type="text"
           placeholder="What's on your mind, name?"
-          value={newPost}
+          value={newPostText}
           onChange={handleNewPostChange}
         />
+        <StyledInputFile
+          label="Upload image"
+          onChange={onFileChange}
+        ></StyledInputFile>
         <button type="submit">
             <img src={SendBtn} alt='send button'>
             </img>

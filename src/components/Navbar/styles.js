@@ -98,9 +98,7 @@ export const NavNotification = styled.div`
     /* identical to box height */
     text-align: center;
 
-    color: black;
-
-    /* color: #ffffff; */
+    color: #ffffff;
   }
 `;
 

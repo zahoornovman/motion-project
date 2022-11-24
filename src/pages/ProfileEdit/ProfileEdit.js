@@ -1,5 +1,5 @@
 // Libraries
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -14,11 +14,14 @@ import {
     StyledProfileCardEdit,
     StyledUserDetailsContainerEdit,
     StyledFormEdit,
+    StyledHobbiesSectionEdit,
 } from './styles';
 import {
     StyledInputFile,
     StyledInputHobbies,
+    StyledInputHobby,
     StyledInputText,
+    StyledInputTextHobbies,
 } from '../../components/styledComponents/StyledInput';
 import {
     SecondaryButton,
@@ -34,6 +37,7 @@ export const ProfileEdit = () => {
     const currentUser = useSelector((state) => state.currentUser);
     const token = useSelector(selectUserToken);
     const dispatch = useDispatch();
+    const inputRef = useRef(null);
 
     // State
     const [userStatus, setUserStatus] = React.useState(currentUser.status);
@@ -44,15 +48,13 @@ export const ProfileEdit = () => {
     const [username, setUsername] = React.useState('');
     const [job, setJob] = React.useState('');
     const [location, setLocation] = React.useState('');
-    // const [phone, setPhone] = React.useState(currentUser.phone);
     const [about, setAbout] = React.useState('');
-    const [avatar, setAvatar] = React.useState({ image: '' });
+    const [avatar, setAvatar] = React.useState({});
+    const [thingsUserLikes, setThingsUserLikes] = React.useState([]);
+    const [hobbiesInput, setHobbiesInput] = React.useState('');
+    // const [phone, setPhone] = React.useState(currentUser.phone);
     // const [password, setPassword] = React.useState(currentUser.password);
-    // const [avatar, setAvatar] = React.useState(currentUser.avatar);
     // const [banner, setBanner] = React.useState(currentUser.banner);
-    // const [thingsUserLikes, setThingsUserLikes] = React.useState(
-    //     currentUser.things_user_likes
-    // );
 
     const updatedUser = {
         email: email,
@@ -63,7 +65,7 @@ export const ProfileEdit = () => {
         location: location,
         about_me: about,
         avatar: avatar,
-        // things_user_likes: thingsUserLikes,
+        things_user_likes: thingsUserLikes,
     };
 
     // Methods
@@ -72,28 +74,37 @@ export const ProfileEdit = () => {
         dispatch(getCurrentUser(payload));
     };
 
-    const onSave = () => {
-        const payload = { token: `Bearer ${token}`, body: updatedUser };
-        console.log('user body', updatedUser);
-        dispatch(updateCurrentUser(payload));
-    };
-
-    const onUploadClick = (e) => {
-        console.log('uploading');
-        // console.log(e);
-    };
-
     const onFileChange = (e) => {
-        // e.preventDefault(); // not submitting here
         console.log(e.target.files);
         const newAvatar = e.target.files['0'];
         setAvatar(newAvatar);
-
-        console.log('avatar state', avatar);
-
-        // const formData = new FormData();
-        // formData.append('avatar', avatar);
+        // console.log('avatar state', avatar);
     };
+
+    const onSave = () => {
+        if (typeof updatedUser.avatar !== 'file') delete updatedUser.avatar;
+        const payload = { token: `Bearer ${token}`, body: updatedUser };
+        dispatch(updateCurrentUser(payload));
+    };
+
+    const addHobbies = (e) => {
+        e.preventDefault();
+        const newHobbies = hobbiesInput.split(',');
+        setThingsUserLikes([...thingsUserLikes, ...newHobbies]);
+        setHobbiesInput([]);
+    };
+
+    const removeHobby = (e) => {
+        e.preventDefault();
+        const currentHobbies = [...thingsUserLikes];
+        const targetHobby = e.target.innerHTML;
+        currentHobbies.splice(currentHobbies.indexOf(targetHobby), 1);
+        setThingsUserLikes(currentHobbies);
+    };
+
+    // const onUploadClick = (e) => {
+    //     console.log('uploading');
+    // };
 
     // Component did mount
     useEffect(() => {
@@ -111,7 +122,7 @@ export const ProfileEdit = () => {
         setAbout(currentUser.about_me);
         setAvatar(currentUser.avatar);
 
-        // setThingsUserLikes(currentUser.things_user_likes);
+        setThingsUserLikes(currentUser.things_user_likes);
     }, [currentUser]);
 
     // Render
@@ -125,15 +136,17 @@ export const ProfileEdit = () => {
                 <StyledAvatarEdit>
                     <div id="update-image">
                         <img src={avatar} alt="profile picture" />
-                        {/* <SecondaryButton
+
+                        <SecondaryButton
                             onClick={(e) => {
-                                onUploadClick(e);
+                                e.preventDefault();
+                                inputRef.current.click();
                             }}
                             type="submit"
                             htmlFor="fileUpload"
                         >
                             update image
-                        </SecondaryButton> */}
+                        </SecondaryButton>
                     </div>
                     <div id="delete-save">
                         <SecondaryButton onClick={() => {}}>
@@ -198,21 +211,27 @@ export const ProfileEdit = () => {
                                 setAbout(input);
                             }}
                         ></StyledInputText>
-                        {/* <StyledInputHobbies
-                            label="Things I like"
-                            placeholder="Fishing, dancing"
-                            value={thingsUserLikes}
-                            onChange={(e) => {
-                                const input = e.target.value;
-
-                                setThingsUserLikes(input);
-                                console.log(input);
-                            }}
-                        ></StyledInputHobbies> */}
                         <StyledInputFile
                             label="Update image"
                             onChange={onFileChange}
+                            reference={inputRef}
                         ></StyledInputFile>
+                        <StyledInputTextHobbies
+                            label="Things I like"
+                            hobbies={thingsUserLikes}
+                            placeholder="Hiking, Swimming, ..."
+                            value={hobbiesInput}
+                            onChange={(e) => {
+                                const input = e.target.value;
+                                setHobbiesInput(input);
+                            }}
+                            onClick={(e) => {
+                                addHobbies(e);
+                            }}
+                            removeHobby={(e) => {
+                                removeHobby(e);
+                            }}
+                        />
                     </StyledFormEdit>
                 </StyledUserDetailsContainerEdit>
             </StyledProfileCardEdit>

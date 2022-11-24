@@ -21,21 +21,14 @@ import Heart from '../assets/svgs/heart.svg';
 const PostExcerpt = ({ post }) => {
   return (
     <article className="post-excerpt">
-      <h3>TEST</h3>
+      <h3>Post</h3>
       <h3>{post.id}</h3>
       <div>
         {post.user.id}
         {post.created}
-        {/* {post.logged_in_user_liked}    */}
         <input type="checkbox" defaultChecked={post.logged_in_user_liked} />
-        {/* <PostAuthor userId={post.user} /> */}
-        {/* <TimeAgo timestamp={post.created} /> */}
       </div>
       <p className="post-content">{post.content.substring(0, 100)}</p>
-      {/* <ReactionButtons post={post} /> */}
-      {/* <Link to={`/posts/${post.id}`} className="button muted-button">
-        View Post
-      </Link> */}
     </article>
   );
 };
@@ -43,10 +36,18 @@ const PostExcerpt = ({ post }) => {
 export function PostsList() {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.posts);
-
   const postStatus = useSelector((state) => state.posts.status);
   const error = useSelector((state) => state.posts.error);
-  const payload = { token: useSelector(selectUserToken) };
+  const payload = { url: null, token: useSelector(selectUserToken) };
+
+  payload.url =
+    "https://motion.propulsion-home.ch/backend/api/social/posts/me/";
+//   payload.url =
+//     "https://motion.propulsion-home.ch/backend/api/social/posts/following/";
+//   payload.url =
+//     "https://motion.propulsion-home.ch/backend/api/social/posts/friends/";
+//   payload.url =
+//     "https://motion.propulsion-home.ch/backend/api/social/posts/likes/";
 
   useEffect(() => {
     if (postStatus === "idle") {
@@ -60,7 +61,7 @@ export function PostsList() {
     console.log("success");
     console.log(posts);
     // Sort posts in reverse chronological order by created timestamp
-     const orderedPosts = posts
+    const orderedPosts = posts
       .slice()
       .sort((a, b) => b.created.localeCompare(a.created));
 
@@ -94,7 +95,7 @@ export function PostsList() {
             <img src={MenuIcon} alt="icon-profile" />
           </MenuPost>
         </div>
-        {content[0]}
+        {content}
 
         <div className="bottom">
             <div className="Heart">
