@@ -3,6 +3,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { NewPost } from "./NewPost";
 import { fetchPosts } from "../store/slices/posts";
 import { selectUserToken } from "../store/slices/loginUser";
+import { MenuPost, Post } from "./styledPosts/styles";
+import { ProfilePost } from "./styledPosts/styles";
+import ProfilePic from "../assets/images/users/jennifer.png";
+import MenuIcon from "../assets/svgs/menu.svg";
+import Share from '../assets/svgs/share.svg';
+import Heart from '../assets/svgs/heart.svg';
+// export const ReactionButton = ({ post }) => {
+//   const reactionButtons = Object.entries(reactionEmoji).map(([name, emoji]) => {
+//     return (
+//       <button key={name} type="button" className="muted-button reaction-button">
+//         {emoji} {post.reactions[name]}
+//       </button>
+//     )
+//   })
 
 const PostExcerpt = ({ post }) => {
   return (
@@ -60,12 +74,43 @@ export function PostsList() {
     content = <div>{error}</div>;
   }
 
+  console.log(content)
+
   return (
     <section className="posts-list">
-      <h2>Posts</h2>
-      {postStatus}
-      {content}
       <NewPost />
+
+      <Post>
+        <div className="top">
+          <ProfilePost>
+            <img src={ProfilePic} alt="icon-profile" />
+          </ProfilePost>
+
+          <div className="name">
+            <p>Jennifer Smith</p>
+            <p>Just now</p>
+          </div>
+
+          <MenuPost>
+            <img src={MenuIcon} alt="icon-profile" />
+          </MenuPost>
+        </div>
+        {content}
+
+        <div className="bottom">
+            <div className="Heart">
+                    <img src={Heart} alt='heart'/>
+                    <p>Like</p>    
+            </div>
+            <div className="Share">
+                <img src={Share} alt='share' />
+                <p>Share</p>
+            </div>
+            <div className="Likes">
+                <p> 2 likes</p>
+            </div>
+        </div>
+      </Post>
     </section>
   );
 }
