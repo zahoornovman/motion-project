@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 //styled components
-import { StyledFindFriendsPage } from "../components/styledComponents/StyledFindFriendsPage";
+import { StyledFindFriendsPage } from "./StyledFindFriendsPage";
 
 //selectors
-import { selectUserToken } from "../store/slices/loginUser";
+import { selectUserToken } from "../../store/slices/loginUser";
 
 //components
-import { UserCard } from "../components/UserCard/UserCard";
+import { UserCard } from "../../components/UserCard/UserCard";
 
 function FindFriends() {
   let token = useSelector(selectUserToken);
