@@ -7,6 +7,8 @@ import { MenuPost, Post } from "./styledPosts/styles";
 import { ProfilePost } from "./styledPosts/styles";
 import ProfilePic from "../assets/images/users/jennifer.png";
 import MenuIcon from "../assets/svgs/menu.svg";
+import Share from '../assets/svgs/share.svg';
+import Heart from '../assets/svgs/heart.svg';
 // export const ReactionButton = ({ post }) => {
 //   const reactionButtons = Object.entries(reactionEmoji).map(([name, emoji]) => {
 //     return (
@@ -92,7 +94,21 @@ export function PostsList() {
             <img src={MenuIcon} alt="icon-profile" />
           </MenuPost>
         </div>
-        {content}
+        {content[0]}
+
+        <div className="bottom">
+            <div className="Heart">
+                    <img src={Heart} alt='heart'/>
+                    <p>Like</p>    
+            </div>
+            <div className="Share">
+                <img src={Share} alt='share' />
+                <p>Share</p>
+            </div>
+            <div className="Likes">
+                <p> 2 likes</p>
+            </div>
+        </div>
       </Post>
     </section>
   );
