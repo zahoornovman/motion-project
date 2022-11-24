@@ -58,6 +58,7 @@ function FindFriends() {
 
   return (
     <StyledFindFriendsPage>
+      {list == "" && <div>Loading....</div>}
       {list.map((obj) => (
         <UserCard key={obj.id} obj={obj} />
       ))}
