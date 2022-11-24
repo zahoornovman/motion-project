@@ -94,10 +94,9 @@ function NavBar(props) {
       </div>
 
       <div>
-        <NavNotification>
+        <NavNotification onClick={handleNotificationOpen}>
           <div>{open === true ? <NotificationsDropdown /> : null}</div>
-          <img
-            onClick={handleNotificationOpen}
+          <img           
             src={NotificationNav}
             alt="icon-notification"
           />
