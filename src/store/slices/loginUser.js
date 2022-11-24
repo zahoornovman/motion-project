@@ -28,12 +28,11 @@ const userSlice = createSlice({
       requested: [],
       next: null,
       previous: null,
-      error: "",
+      error: ""
     },
   },
   reducers: {
     getNotifications: (state, action) => {
-      console.log(action.payload);
       state.notifications.count = action.payload.count;
       state.notifications.next = action.payload.next;
       state.notifications.previous = action.payload.previous;
@@ -46,18 +45,14 @@ const userSlice = createSlice({
       );
       state.notifications.requested = copyRequested;
     },
+    //any error during notification is recorded here
     setNotificationError: (state, action) => {
-      state.error = action.payload.details;
-      console.log(state.error);
+      state.notifications.error = action.payload.details;
     },
     deleteFriendRequest: (state, { payload }) => {
       console.log(payload);
       state.notifications.requested = state.notifications.requested.filter(
         (obj) => {
-          console.log(obj.id);
-          console.log(typeof obj.id);
-          console.log(payload);
-          console.log(typeof payload);
           return obj.id !== parseInt(payload);
         }
       );

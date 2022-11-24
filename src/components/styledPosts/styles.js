@@ -62,4 +62,34 @@ export const Post = styled.div`
   .name {
     margin-right: 250px;
   }
+
+  .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .Heart {
+    display: flex;
+    margin-left: 20px;
+
+    p {
+        margin-left: 30px;
+    }
+  }
+
+  .Share {
+    display: flex;
+    margin-right: 250px;
+
+    p {
+        margin-left: 20px;
+    }
+  }
+
+  .Likes {
+    margin-right: 20px;
+  }
 `;

@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserToken } from "../store/slices/loginUser";
+// import { addPost } from '../store/slices/posts';
 import { addNewPost } from "../store/slices/posts";
+import { ProfileIcon } from "./Navbar/styles";
+import { PostSection, ProfilePost } from "./styledPosts/styles";
+import ProfilePic from "../assets/images/users/jennifer.png";
+import SendBtn from '../assets/svgs/send_button.svg';
 import { StyledInputFile } from "./styledComponents/StyledInput";
 
 import { ProfileIcon } from "./Navbar/styles";
@@ -47,28 +52,23 @@ function NewPost() {
   return (
     <div className="NewPost">
       <PostSection onSubmit={handleAddPost}>
-        <ProfilePost>
-          <img src={ProfilePic} alt="icon-profile" />
-        </ProfilePost>
-
-        <form onSubmit={handleAddPost}>
-          <input
-            type="text"
-            placeholder="What's on your mind, NAME?"
-            value={newPostText}
-            onChange={handleNewPostChange}
-          />
-          <StyledInputFile
-            label="Upload image"
-            onChange={onFileChange}
-          ></StyledInputFile>
-          <input type="submit" value={"Add"} />
-
-          {/* <button type="submit">
+          <ProfilePost>
+            <img src={ProfilePic} alt="icon-profile" />
+          </ProfilePost>
+        <input
+          type="text"
+          placeholder="What's on your mind, name?"
+          value={newPostText}
+          onChange={handleNewPostChange}
+        />
+        <StyledInputFile
+          label="Upload image"
+          onChange={onFileChange}
+        ></StyledInputFile>
+        <button type="submit">
             <img src={SendBtn} alt='send button'>
             </img>
-          </button> */}
-        </form>
+        </button>
       </PostSection>
     </div>
   );
