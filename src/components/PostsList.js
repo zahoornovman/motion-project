@@ -4,17 +4,42 @@ import { NewPost } from "./NewPost";
 import { fetchPosts } from "../store/slices/posts";
 import { selectUserToken } from "../store/slices/loginUser";
 
+
+import { MenuPost, Post } from "./styledPosts/styles";
+import { ProfilePost } from "./styledPosts/styles";
+import ProfilePic from "../assets/images/users/jennifer.png";
+import MenuIcon from "../assets/svgs/menu.svg";
+
 const PostExcerpt = ({ post }) => {
   return (
     <article className="post-excerpt">
-      <h3>Post</h3>
+      <h3>SINGLE POST</h3>
       <h3>{post.id}</h3>
       <div>
         {post.user.id}
-        {post.created}
         <input type="checkbox" defaultChecked={post.logged_in_user_liked} />
       </div>
       <p className="post-content">{post.content.substring(0, 100)}</p>
+
+
+      <h3>SINGLE STYLED POST</h3>
+      <div className="top">
+          <ProfilePost>
+            <img src={ProfilePic} alt="icon-profile" />
+          </ProfilePost>
+
+          <div className="name">
+          <p>Jennifer Smith</p>
+          {post.created}
+
+          <p>  {Date.parse(post.created)}</p>
+
+          </div>
+
+          <MenuPost>
+            <img src={MenuIcon} alt="icon-profile" />
+          </MenuPost>
+        </div>
     </article>
   );
 };
@@ -62,10 +87,14 @@ export function PostsList() {
 
   return (
     <section className="posts-list">
-      <h2>Posts</h2>
+      <h1>POSTS</h1>
+
+      <h2>NEWPOST</h2>
+      <NewPost />
+
+      <h2>AFTER NEWPOST</h2>
       {postStatus}
       {content}
-      <NewPost />
     </section>
   );
 }
