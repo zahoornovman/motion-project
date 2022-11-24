@@ -33,9 +33,12 @@ export const StyledAvatarEdit = styled.div`
     }
 
     img {
-        height: 100px;
         width: 100px;
         margin: auto 0px 20px 0px;
+        border-radius: 50%;
+        // fix streching
+        object-fit: cover;
+        object-position: center;
     }
 
     #update-image > button {
@@ -56,26 +59,39 @@ export const StyledFormEdit = styled.form`
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
-`;
 
-export const StyledHobbiesSectionEdit = styled.section`
-    display: flex;
-    flex-flow: column;
-    justify-content: flex-start;
-    margin: 40px 30px 30px;
-
-    div {
+    #bottomSection {
         display: flex;
-        flex-flow: row wrap;
+        flex-flow: column wrap;
         width: 100%;
-        margin: 16px 0%;
-        p {
-            margin: 5px;
-            padding: 8px;
-            background-color: lightgray;
-            background: #00000005;
-            border: 1px solid #00000005;
-            border-radius: 18px;
+        margin: 0 30px;
+
+        #hobbiesContainer {
+            display: flex;
+            min-width: 100%;
         }
     }
 `;
+
+// export const StyledHobbiesSectionEdit = styled.section`
+//     display: flex;
+//     flex-flow: row wrap;
+//     justify-content: flex-start;
+//     margin: 40px 30px 30px;
+//     width: 100%;
+
+//     div {
+//         display: flex;
+//         flex-flow: row wrap;
+//         width: 100%;
+//         margin: 16px 0%;
+//         p {
+//             margin: 5px;
+//             padding: 8px;
+//             background-color: lightgray;
+//             background: #00000005;
+//             border: 1px solid #00000005;
+//             border-radius: 18px;
+//         }
+//     }
+// `;
