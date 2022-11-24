@@ -45,10 +45,17 @@ export const MenuPost = styled.div`
   align-items: center;
 `;
 
+export const PostsWrap = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid red;
+`;
+
 export const Post = styled.div`
   width: 560px;
   margin-left: 100px;
   margin-top: 20px;
+  /* min-height: 5px; */
 
   background: #ffffff;
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2), 0px 10px 20px rgba(0, 0, 0, 0.05);
@@ -76,7 +83,7 @@ export const Post = styled.div`
     margin-left: 20px;
 
     p {
-        margin-left: 30px;
+      margin-left: 30px;
     }
   }
 
@@ -85,7 +92,7 @@ export const Post = styled.div`
     margin-right: 250px;
 
     p {
-        margin-left: 20px;
+      margin-left: 20px;
     }
   }
 

@@ -5,31 +5,80 @@ import { fetchPosts } from "../store/slices/posts";
 import { selectUserToken } from "../store/slices/loginUser";
 import { MenuPost, Post } from "./styledPosts/styles";
 import { ProfilePost } from "./styledPosts/styles";
+import { PostsWrap } from "./styledPosts/styles";
+
 import ProfilePic from "../assets/images/users/jennifer.png";
 import MenuIcon from "../assets/svgs/menu.svg";
-import Share from '../assets/svgs/share.svg';
-import Heart from '../assets/svgs/heart.svg';
-// export const ReactionButton = ({ post }) => {
-//   const reactionButtons = Object.entries(reactionEmoji).map(([name, emoji]) => {
-//     return (
-//       <button key={name} type="button" className="muted-button reaction-button">
-//         {emoji} {post.reactions[name]}
-//       </button>
-//     )
-//   })
+import Share from "../assets/svgs/share.svg";
+import Heart from "../assets/svgs/heart.svg";
 
 const PostExcerpt = ({ post }) => {
   return (
-    <article className="post-excerpt">
-      <h3>Post</h3>
-      <h3>{post.id}</h3>
-      <div>
-        {post.user.id}
-        {post.created}
-        <input type="checkbox" defaultChecked={post.logged_in_user_liked} />
-      </div>
-      <p className="post-content">{post.content.substring(0, 100)}</p>
-    </article>
+    <>
+      <Post>
+        <div className="top">
+          <ProfilePost>
+            <img src={ProfilePic} alt="icon-profile" />
+          </ProfilePost>
+
+          <div className="name">
+            <p>First Name: {post.user.first_name}</p>
+            <p>Last Name: {post.user.last_name}</p>
+            {/* <p>Avatar: {post.user.avatar}</p> */}
+            <p>Created: {Date.parse(post.created)}</p>
+          </div>
+
+          {/* <p>
+            <input
+              type="checkbox"
+              id="liked"
+              defaultChecked={post.logged_in_user_liked}
+            />
+            <label for="liked">Liked</label>
+          </p>
+          <p>
+            <input
+              type="checkbox"
+              id="following"
+              defaultChecked={post.logged_in_user_is_following}
+            />
+            <label for="liked">Following</label>
+          </p>
+          <p>
+            <input
+              type="checkbox"
+              id="friends"
+              defaultChecked={post.logged_in_user_is_friends}
+            />
+            <label for="friends">Friends</label>
+          </p>
+          <p>Amount of Likes: {post.amount_of_likes}</p> */}
+
+          <MenuPost>
+            <img src={MenuIcon} alt="icon-profile" />
+          </MenuPost>
+
+        </div>
+
+        <div className="post-content">
+            <p>Content: {post.content}</p>
+          </div>
+
+        <div className="bottom">
+          <div className="Heart">
+            <img src={Heart} alt="heart" />
+            <p>Like</p>
+          </div>
+          <div className="Share">
+            <img src={Share} alt="share" />
+            <p>Share</p>
+          </div>
+          <div className="Likes">
+            <p> 2 likes</p>
+          </div>
+        </div>
+      </Post>
+    </>
   );
 };
 
@@ -42,12 +91,12 @@ export function PostsList() {
 
   payload.url =
     "https://motion.propulsion-home.ch/backend/api/social/posts/me/";
-//   payload.url =
-//     "https://motion.propulsion-home.ch/backend/api/social/posts/following/";
-//   payload.url =
-//     "https://motion.propulsion-home.ch/backend/api/social/posts/friends/";
-//   payload.url =
-//     "https://motion.propulsion-home.ch/backend/api/social/posts/likes/";
+  //   payload.url =
+  //     "https://motion.propulsion-home.ch/backend/api/social/posts/following/";
+  //   payload.url =
+  //     "https://motion.propulsion-home.ch/backend/api/social/posts/friends/";
+  //   payload.url =
+  //     "https://motion.propulsion-home.ch/backend/api/social/posts/likes/";
 
   useEffect(() => {
     if (postStatus === "idle") {
@@ -66,6 +115,7 @@ export function PostsList() {
       .sort((a, b) => b.created.localeCompare(a.created));
 
     console.log(orderedPosts);
+
     content = orderedPosts.map((post) => (
       <PostExcerpt key={post.id} post={post} />
     ));
@@ -74,44 +124,16 @@ export function PostsList() {
     content = <div>{error}</div>;
   }
 
-  console.log(content)
+  console.log(content);
 
   return (
-    <section className="posts-list">
+    <PostsWrap>
       <NewPost />
 
-      <Post>
-        <div className="top">
-          <ProfilePost>
-            <img src={ProfilePic} alt="icon-profile" />
-          </ProfilePost>
-
-          <div className="name">
-            <p>Jennifer Smith</p>
-            <p>Just now</p>
-          </div>
-
-          <MenuPost>
-            <img src={MenuIcon} alt="icon-profile" />
-          </MenuPost>
-        </div>
-        {content}
-
-        <div className="bottom">
-            <div className="Heart">
-                    <img src={Heart} alt='heart'/>
-                    <p>Like</p>    
-            </div>
-            <div className="Share">
-                <img src={Share} alt='share' />
-                <p>Share</p>
-            </div>
-            <div className="Likes">
-                <p> 2 likes</p>
-            </div>
-        </div>
-      </Post>
-    </section>
+      {/* <div className="wrap"> */}
+      {content}
+      {/* </div> */}
+    </PostsWrap>
   );
 }
 

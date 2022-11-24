@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUserToken } from "../store/slices/loginUser";
 // import { addPost } from '../store/slices/posts';
 import { addNewPost } from "../store/slices/posts";
-import { ProfileIcon } from "./Navbar/styles";
 import { PostSection, ProfilePost } from "./styledPosts/styles";
 import ProfilePic from "../assets/images/users/jennifer.png";
 import SendBtn from '../assets/svgs/send_button.svg';
 import { StyledInputFile } from "./styledComponents/StyledInput";
+
 
 function NewPost() {
   const [newPostText, setNewPostText] = useState("");
