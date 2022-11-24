@@ -7,7 +7,7 @@ import { StyledInputFile } from "./styledComponents/StyledInput";
 import { ProfileIcon } from "./Navbar/styles";
 import { PostSection, ProfilePost } from "./styledPosts/styles";
 import ProfilePic from "../assets/images/users/jennifer.png";
-import SendBtn from '../assets/svgs/send_button.svg';
+import SendBtn from "../assets/svgs/send_button.svg";
 
 function NewPost() {
   const [newPostText, setNewPostText] = useState("");
@@ -47,33 +47,29 @@ function NewPost() {
   return (
     <div className="NewPost">
       <PostSection onSubmit={handleAddPost}>
-        
-      <ProfilePost>
-            <img src={ProfilePic} alt="icon-profile" />
-          </ProfilePost>
+        <ProfilePost>
+          <img src={ProfilePic} alt="icon-profile" />
+        </ProfilePost>
 
-      <form onSubmit={handleAddPost}>
-        <input
-          type="text"
-          placeholder="What's on your mind, NAME?"
-          value={newPostText}
-          onChange={handleNewPostChange}
-        />
-        <StyledInputFile
-          label="Upload image"
-          onChange={onFileChange}
-        ></StyledInputFile>
+        <form onSubmit={handleAddPost}>
+          <input
+            type="text"
+            placeholder="What's on your mind, NAME?"
+            value={newPostText}
+            onChange={handleNewPostChange}
+          />
+          <StyledInputFile
+            label="Upload image"
+            onChange={onFileChange}
+          ></StyledInputFile>
           <input type="submit" value={"Add"} />
-
 
           {/* <button type="submit">
             <img src={SendBtn} alt='send button'>
             </img>
           </button> */}
-          
         </form>
-        </PostSection>
-
+      </PostSection>
     </div>
   );
 }
