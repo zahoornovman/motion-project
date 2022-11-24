@@ -1,19 +1,26 @@
+//svgs
 import PendingLogo from "../../assets/svgs/pending.svg";
 import Accept from "../../assets/svgs/accept.svg";
 import Reject from "../../assets/svgs/reject.svg";
 
+//selectors
 import {
   selectNotificationsReceived,
   selectNotificationsRequested,
+  selectUserToken,
 } from "../../store/slices/loginUser";
 
+//hooks
 import { useSelector, useDispatch } from "react-redux";
 
+//SytledComponents
 import { StyledNavDropdown } from "./styles.js";
+
+//reducers
 import {
-  selectUserToken,
   deleteFriendRequest,
   updateRemainingNotifications,
+  setNotificationError,
 } from "../../store/slices/loginUser";
 
 function NotificationsDropdown() {
@@ -26,8 +33,6 @@ function NotificationsDropdown() {
   const requestedNotificationsParsed = requestedRequests(
     requestedNotifications
   );
-  console.log(receivedNotifications);
-  console.log(requestedNotifications);
 
   //function for parsing notifications array for easy access in return function
   function receivedRequests(receivedNotifications) {
@@ -86,13 +91,11 @@ function NotificationsDropdown() {
       .then((response) => response.text())
       .then((result) => console.log(result))
       .then(() => dispatch(updateRemainingNotifications(e.target.id)))
-      .catch((error) => console.log("error", error));
+      .catch((error) => dispatch(setNotificationError(error)));
   };
 
-  //function to accept friends request
+  //accepting friends request
   const handleAccept = (e) => {
-    console.log("entering Accept");
-
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Accept", "application/json");
@@ -113,10 +116,12 @@ function NotificationsDropdown() {
       `https://motion.propulsion-home.ch/backend/api/social/friends/requests/${e.target.id}/`,
       requestOptions
     )
-      .then((response) => response.text())
-      .then((result) => console.log(result))
+      
+      .then((response) => response.json())
       .then(() => dispatch(updateRemainingNotifications(e.target.id)))
-      .catch((error) => console.log("error", error));
+      .catch((error) => console.log(error))
+
+    // .catch((error) => dispatch(setNotificationError(error)));
   };
 
   //deleting sent friend request
@@ -138,9 +143,8 @@ function NotificationsDropdown() {
       requestOptions
     )
       .then((response) => response.text())
-      // .then((result) => console.log(result))
       .then(() => dispatch(deleteFriendRequest(e.target.id)))
-      .catch((error) => console.log("error", error));
+      .catch((error) => dispatch(setNotificationError(error)));
   };
 
   //incomplete work. Figuring out how to display a different image when src is missing
@@ -152,7 +156,7 @@ function NotificationsDropdown() {
     <StyledNavDropdown>
       <h3>Received requests</h3>
 
-      {!receivedNotificationsParsed ? <div>No Friend Requests</div> : null}
+      {receivedNotificationsParsed === [] && <div>No Friend Requests</div>}
       {receivedNotificationsParsed.map((item) => (
         <div key={item.id}>
           <img
@@ -171,7 +175,7 @@ function NotificationsDropdown() {
       ))}
 
       <h3>Sent requests</h3>
-      {!requestedNotificationsParsed ? <div>No Sent Requests</div> : null}
+      {requestedNotificationsParsed === [] && <div>No Sent Requests</div>}
       {requestedNotificationsParsed.map((item) => (
         <div key={item.id}>
           <img
