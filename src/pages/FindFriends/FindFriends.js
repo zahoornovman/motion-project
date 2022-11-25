@@ -14,6 +14,7 @@ import { UserCard } from "../../components/UserCard/UserCard";
 function FindFriends() {
   let token = useSelector(selectUserToken);
 
+  //use state to keep track of the users
   const [list, setList] = useState([]);
   const [error, setError] = useState("");
 
@@ -22,11 +23,11 @@ function FindFriends() {
   }, []);
 
   const loadUsers = () => {
-    var myHeaders = new Headers();
+    const myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
 
-    var requestOptions = {
+    const requestOptions = {
       method: "GET",
       headers: myHeaders,
       redirect: "follow",

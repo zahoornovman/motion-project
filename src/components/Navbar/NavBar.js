@@ -40,6 +40,7 @@ function NavBar(props) {
   const location = useLocation();
 
   const [open, setOpen] = useState(false);
+  const [notificationsCount, setNotificationsCount] = useState(0);
 
   const handleNotificationOpen = () => {
     setOpen(!open);
@@ -50,12 +51,12 @@ function NavBar(props) {
   let avatar = useSelector(selectUserAvatar);
 
 
-  useEffect(() => {
-    var myHeaders = new Headers();
+  const fetchNotifications = () => {
+    const myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
 
-    var requestOptions = {
+    const requestOptions = {
       method: "GET",
       headers: myHeaders,
       redirect: "follow",
@@ -74,7 +75,13 @@ function NavBar(props) {
       .then((result) => dispatch(getNotifications(result)))
       .catch((error) => console.log(error));
     // .catch((error) => dispatch(setNotificationError(error.text())));
-  }, [location]);
+
+  }
+
+  useEffect(() => {
+    fetchNotifications();
+    setNotificationsCount(count);
+  }, [location], notificationsCount );
 
   return (
     <NavContainer>

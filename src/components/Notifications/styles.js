@@ -5,7 +5,7 @@ export const StyledNavDropdown = styled.div`
     position: absolute;
     top: 80px;
     bottom: 0px;
-    right: 80px;
+    right: 60px;
     background: #ffffff;
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2),
         0px 20px 40px rgba(0, 0, 0, 0.15);
@@ -15,18 +15,16 @@ export const StyledNavDropdown = styled.div`
     list-style-type: none;
     width: 350px;
     min-height: auto;
-    max-height: 350px;
+    max-height: 50%;
     margin: 5px 0px;
     padding: 10px 10px;
     border: 1px solid gray;
     background: rgba(255, 255, 255, 1);
 
-    box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.15);
-    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.2);
-
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
 
     h3 {
         width: 100%;
