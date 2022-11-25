@@ -1,6 +1,17 @@
 import styled from 'styled-components';
 
+export const StyledBanner = styled.img`
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    z-index: -1;
+    max-height: 800px;
+`;
+
 export const StyledProfileCard = styled.section`
+    position: relative;
     margin: 120px auto 34px;
     height: 400px;
     min-height: 100%;
@@ -62,7 +73,7 @@ export const StyledContactSection = styled.section`
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
-    margin: 40px auto 40px auto;
+    margin: 40px 30px;
     max-width: 50%;
 
     #about {
@@ -94,7 +105,7 @@ export const StyledHobbiesSection = styled.section`
     display: flex;
     flex-flow: column;
     justify-content: flex-start;
-    margin: 40px auto 40px auto;
+    margin: 40px 30px;
     max-width: 50%;
 `;
 
