@@ -23,10 +23,10 @@ export const getCurrentUser = createAsyncThunk(
 );
 
 //// update current user
-export const updateCurrentUser = createAsyncThunk(
+export const updateCurrentUserText = createAsyncThunk(
     'user/updateUser',
     async (payload) => {
-        console.log('updating user with', payload.body);
+        console.log('updating user text with', payload.body);
         try {
             const { data } = await axios.patch(
                 'https://motion.propulsion-home.ch/backend/api/users/me/',
@@ -35,8 +35,30 @@ export const updateCurrentUser = createAsyncThunk(
                 {
                     headers: {
                         Authorization: payload.token,
-                        // 'Content-Type': 'multipart/form-data',
                         'Content-Type': 'application/json',
+                    },
+                }
+            );
+            return data;
+        } catch (err) {
+            console.log(err);
+        }
+    }
+);
+
+export const updateCurrentUserFiles = createAsyncThunk(
+    'user/updateUser',
+    async (payload) => {
+        console.log('updating user files with', payload.body);
+        try {
+            const { data } = await axios.patch(
+                'https://motion.propulsion-home.ch/backend/api/users/me/',
+
+                payload.body,
+                {
+                    headers: {
+                        Authorization: payload.token,
+                        'Content-Type': 'multipart/form-data',
                     },
                 }
             );
