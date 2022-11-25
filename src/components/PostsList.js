@@ -12,6 +12,8 @@ import MenuIcon from "../assets/svgs/menu.svg";
 import Share from "../assets/svgs/share.svg";
 import Heart from "../assets/svgs/heart.svg";
 
+import { format, formatDistance, subDays } from "date-fns";
+
 const PostExcerpt = ({ post }) => {
   return (
     <>
@@ -22,27 +24,27 @@ const PostExcerpt = ({ post }) => {
           </ProfilePost>
 
           <div className="name">
-            <p>First Name: {post.user.first_name}</p>
-            <p>Last Name: {post.user.last_name}</p>
+            <p>
+              {post.user.first_name} {post.user.last_name}
+            </p>
             {/* <p>Avatar: {post.user.avatar}</p> */}
-            <p>Created: {Date.parse(post.created)}</p>
+
+            <p>{Date.parse(post.created)}</p>
+            <p>{format(Date.parse(post.created), "MMMM dd")}</p>
+            <p>
+              {formatDistance(Date.parse(post.created), new Date(), {
+                addSuffix: true,
+              })}
+            </p>
           </div>
 
-          {/* <p>
-            <input
-              type="checkbox"
-              id="liked"
-              defaultChecked={post.logged_in_user_liked}
-            />
-            <label for="liked">Liked</label>
-          </p>
           <p>
             <input
               type="checkbox"
               id="following"
               defaultChecked={post.logged_in_user_is_following}
             />
-            <label for="liked">Following</label>
+            <label for="liked">Is Following</label>
           </p>
           <p>
             <input
@@ -50,31 +52,37 @@ const PostExcerpt = ({ post }) => {
               id="friends"
               defaultChecked={post.logged_in_user_is_friends}
             />
-            <label for="friends">Friends</label>
+            <label for="friends">Is Friends</label>
           </p>
-          <p>Amount of Likes: {post.amount_of_likes}</p> */}
 
           <MenuPost>
             <img src={MenuIcon} alt="icon-profile" />
           </MenuPost>
-
         </div>
 
         <div className="post-content">
-            <p>Content: {post.content}</p>
-          </div>
+          <p>{post.content}</p>
+        </div>
 
         <div className="bottom">
           <div className="Heart">
             <img src={Heart} alt="heart" />
             <p>Like</p>
+            <p>
+              <input
+                type="checkbox"
+                id="liked"
+                defaultChecked={post.logged_in_user_liked}
+              />
+              <label for="liked">Liked</label>
+            </p>
           </div>
           <div className="Share">
             <img src={Share} alt="share" />
             <p>Share</p>
           </div>
           <div className="Likes">
-            <p> 2 likes</p>
+            <p>{post.amount_of_likes} Likes</p>
           </div>
         </div>
       </Post>
@@ -107,8 +115,6 @@ export function PostsList() {
   let content;
 
   if (postStatus === "succeeded") {
-    console.log("success");
-    console.log(posts);
     // Sort posts in reverse chronological order by created timestamp
     const orderedPosts = posts
       .slice()
@@ -124,15 +130,10 @@ export function PostsList() {
     content = <div>{error}</div>;
   }
 
-  console.log(content);
-
   return (
     <PostsWrap>
       <NewPost />
-
-      {/* <div className="wrap"> */}
       {content}
-      {/* </div> */}
     </PostsWrap>
   );
 }
