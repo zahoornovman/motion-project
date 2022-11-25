@@ -164,7 +164,7 @@ function NotificationsDropdown() {
         if (!response.ok) {
           throw new Error(); // Will `catch` the error below
         }
-        return response.json();
+        return response.text();
       })
       .then(() => dispatch(deleteFriendRequest(e.target.id)))
       .catch((error) => console.log(error));

@@ -56,7 +56,7 @@ const userSlice = createSlice({
           return obj.id !== parseInt(payload);
         }
       );
-      state.notifications.count -= 1;
+      // state.notifications.count -= 1;
     },
     updateRemainingNotifications: (state, { payload }) => {
       state.notifications.received = state.notifications.received.filter(

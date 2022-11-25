@@ -77,7 +77,9 @@ export const StyledNavDropdown = styled.div`
           color: black;
           overflow: wrap;
         }
-
+      }
+      p:nth-child(2) {
+        opacity:50%;
       }
       div:nth-child(3) {
         width: 35%;
@@ -92,8 +94,6 @@ export const StyledNavDropdown = styled.div`
 `;
 
 export const StyledSvgBase = styled.img`
-
-
   height: 30px;
   width: 30px;
   left: 293px;
@@ -102,7 +102,7 @@ export const StyledSvgBase = styled.img`
   background: rgba(0, 0, 0, 1);
   box-sizing: border-box;
   padding: 8px;
-/* 
+  /* 
   width: 30px;
   height: 30px; */
 
