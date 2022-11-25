@@ -72,8 +72,6 @@ export const Profile = () => {
 
     // When store changes
     useEffect(() => {
-        // setId(currentUser.id);
-        // setUsername(currentUser.username);
         setFirstName(currentUser.first_name);
         setLastName(currentUser.last_name);
         setEmail(currentUser.email);
@@ -87,8 +85,6 @@ export const Profile = () => {
         setAmountOfFriends(currentUser.amount_of_friends);
         setAmountOfFollowers(currentUser.amount_of_followers);
         setAmountFollowing(currentUser.amount_following);
-
-        console.log(thingsUserLikes);
     }, [currentUser]);
 
     return (

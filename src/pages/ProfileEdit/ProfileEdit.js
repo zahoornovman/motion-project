@@ -3,7 +3,8 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     getCurrentUser,
-    updateCurrentUser,
+    updateCurrentUserFiles,
+    updateCurrentUserText,
 } from '../../store/slices/currentUser';
 import { selectUserToken } from '../../store/slices/loginUser';
 
@@ -55,7 +56,7 @@ export const ProfileEdit = () => {
     // const [phone, setPhone] = React.useState(currentUser.phone);
     // const [password, setPassword] = React.useState(currentUser.password);
 
-    const updatedUser = {
+    const updatedUserText = {
         email: email,
         first_name: firstName,
         last_name: lastName,
@@ -63,10 +64,35 @@ export const ProfileEdit = () => {
         job: job,
         location: location,
         about_me: about,
-        avatar: avatar,
-        banner: banner,
         things_user_likes: thingsUserLikes,
     };
+
+    const updatedUserFiles = {
+        avatar: avatar,
+        banner: banner,
+    };
+
+    // const formData = new FormData();
+    // formData.append('email', String(email));
+    // formData.append('first_name', String(firstName));
+    // formData.append('last_name', String(lastName));
+    // formData.append('username', String(username));
+    // formData.append('job', String(job));
+    // formData.append('location', String(location));
+    // formData.append('about_me', String(about));
+    // formData.append('avatar', avatar);
+    // formData.append('banner', banner);
+    // thingsUserLikes.forEach((hobby) =>
+    //     formData.append('things_user_likes', hobby)
+    // );
+    // formData.append(
+    //     'things_user_likes',
+    //     JSON.stringify(
+    //         thingsUserLikes.map((hobby) => {
+    //             return { keyword: hobby };
+    //         })
+    //     )
+    // );
 
     // Methods
     const onLoad = () => {
@@ -105,13 +131,30 @@ export const ProfileEdit = () => {
     };
 
     const saveUpdates = () => {
-        console.log('updated user body', updatedUser);
-        console.log('type of avatar', typeof updatedUser.avatar);
-        console.log('type of banner', typeof updatedUser.banner);
-        if (typeof updatedUser.avatar !== 'object') delete updatedUser.avatar;
-        if (typeof updatedUser.banner !== 'object') delete updatedUser.banner;
-        const payload = { token: `Bearer ${token}`, body: updatedUser };
-        dispatch(updateCurrentUser(payload));
+        // console.log('updated user body', JSON.stringify(updatedUser));
+        // console.log('type of avatar', typeof updatedUser.avatar);
+        // console.log('type of banner', typeof updatedUser.banner);
+
+        const payloadText = {
+            token: `Bearer ${token}`,
+            body: updatedUserText,
+        };
+
+        if (typeof updatedUserFiles.avatar !== 'object')
+            delete updatedUserFiles.avatar;
+        if (typeof updatedUserFiles.banner !== 'object')
+            delete updatedUserFiles.banner;
+
+        const payloadFiles = {
+            token: `Bearer ${token}`,
+            body: updatedUserFiles,
+        };
+
+        console.log('payloadtext', payloadText);
+        console.log('payloadfiles', payloadFiles);
+
+        dispatch(updateCurrentUserText(payloadText));
+        dispatch(updateCurrentUserFiles(payloadFiles));
     };
 
     // Component did mount
