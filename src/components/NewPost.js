@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserToken } from "../store/slices/loginUser";
+// import { addPost } from '../store/slices/posts';
 import { addNewPost } from "../store/slices/posts";
+import { PostSection, ProfilePost } from "./styledPosts/styles";
+import ProfilePic from "../assets/images/users/jennifer.png";
+import SendBtn from '../assets/svgs/send_button.svg';
 import { StyledInputFile } from "./styledComponents/StyledInput";
+
 
 function NewPost() {
   const [newPostText, setNewPostText] = useState("");
@@ -41,10 +46,13 @@ function NewPost() {
 
   return (
     <div className="NewPost">
-      <form onSubmit={handleAddPost}>
+      <PostSection onSubmit={handleAddPost}>
+          <ProfilePost>
+            <img src={ProfilePic} alt="icon-profile" />
+          </ProfilePost>
         <input
           type="text"
-          placeholder="Your next post"
+          placeholder="What's on your mind, name?"
           value={newPostText}
           onChange={handleNewPostChange}
         />
@@ -52,8 +60,11 @@ function NewPost() {
           label="Upload image"
           onChange={onFileChange}
         ></StyledInputFile>
-        <input type="submit" value={"Add"} />
-      </form>
+        <button type="submit">
+            <img src={SendBtn} alt='send button'>
+            </img>
+        </button>
+      </PostSection>
     </div>
   );
 }
