@@ -45,9 +45,9 @@ const userSlice = createSlice({
       );
       state.notifications.requested = copyRequested;
     },
-    //any error during notification is recorded here
+    //any error during notification is recorded here.
     setNotificationError: (state, action) => {
-      state.notifications.error = action.payload.details;
+      state.notifications.error = action.payload;
     },
     deleteFriendRequest: (state, { payload }) => {
       console.log(payload);
@@ -56,7 +56,7 @@ const userSlice = createSlice({
           return obj.id !== parseInt(payload);
         }
       );
-      state.notifications.count -= 1;
+      // state.notifications.count -= 1;
     },
     updateRemainingNotifications: (state, { payload }) => {
       state.notifications.received = state.notifications.received.filter(

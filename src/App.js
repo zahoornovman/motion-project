@@ -16,7 +16,7 @@ import LogIn from "./pages/Login/Login";
 import { Profile } from "./pages/Profile/Profile";
 import { ProfileEdit } from "./pages/ProfileEdit/ProfileEdit";
 import PostsList from "./components/PostsList";
-import { FindFriends } from "./pages/FindFriends";
+import { FindFriends } from "./pages/FindFriends/FindFriends";
 
 import RequireAuth from "./components/RequireAuth";
 import Registration from "./pages/Login/Registration/registration";
