@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledProfileCardEdit = styled.section`
+    position: relative;
     margin: 120px auto 34px;
     min-height: 100%;
     height: 730px;
@@ -13,6 +14,16 @@ export const StyledProfileCardEdit = styled.section`
     border-radius: 4px;
 
     box-shadow: 0px 0px 1px #00000020, 0px 10px 20px #00000005;
+`;
+
+export const StyledBannerUpdateBtn = styled.div`
+    position: absolute;
+    top: -40px;
+    right: 0px;
+    color: white;
+    img {
+        margin-right: 10px;
+    }
 `;
 
 export const StyledAvatarEdit = styled.div`
@@ -30,6 +41,19 @@ export const StyledAvatarEdit = styled.div`
         justify-content: space-between;
         align-items: center;
         margin: 70px auto;
+
+        div {
+            margin: auto 0px 20px 0px;
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            border-radius: 50%;
+
+            img {
+                width: 100px;
+                height: auto;
+            }
+        }
     }
 
     img {
