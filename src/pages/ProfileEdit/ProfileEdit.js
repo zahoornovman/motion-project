@@ -197,8 +197,9 @@ export const ProfileEdit = () => {
                     </StyledBannerUpdateBtn>
                     <StyledAvatarEdit>
                         <div id="update-image">
-                            <img src={avatar} alt="profile picture" />
-
+                            <div>
+                                <img src={avatar} alt="profile picture" />
+                            </div>
                             <SecondaryButton
                                 onClick={(e) => {
                                     e.preventDefault();

@@ -41,6 +41,19 @@ export const StyledAvatarEdit = styled.div`
         justify-content: space-between;
         align-items: center;
         margin: 70px auto;
+
+        div {
+            margin: auto 0px 20px 0px;
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            border-radius: 50%;
+
+            img {
+                width: 100px;
+                height: auto;
+            }
+        }
     }
 
     img {

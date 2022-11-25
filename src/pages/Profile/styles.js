@@ -35,18 +35,23 @@ export const StyledAvatar = styled.div`
     height: 100%;
     border-right: 2px solid #00000010;
 
-    img {
-        width: 100px;
+    div {
         margin: auto 0px 20px 0px;
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
         border-radius: 50%;
-        // fix streching
-        object-fit: cover;
-        object-position: center;
+
+        img {
+            width: 100px;
+            height: auto;
+        }
     }
 
     #name {
         margin: 6px 0px 4px 0px;
         font-size: 24px;
+        text-align: center;
     }
 
     #location {

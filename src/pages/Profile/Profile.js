@@ -92,7 +92,9 @@ export const Profile = () => {
             <StyledBanner src={banner} alt="banner image" />
             <StyledProfileCard>
                 <StyledAvatar>
-                    <img src={avatar} alt="profile picture" />
+                    <div>
+                        <img src={avatar} alt="profile picture" />
+                    </div>
                     <span id="name">
                         {(firstName ? firstName : '') +
                             (lastName ? ' ' + lastName : '')}
