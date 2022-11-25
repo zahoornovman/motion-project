@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import DefaultImg from '../../assets/images/default.png'
 
 export const loginUser = createAsyncThunk("user/login", async (payload) => {
   const { data } = await axios.post(
@@ -21,6 +22,7 @@ const userSlice = createSlice({
     token: "",
     refresh: "",
     loading: null,
+    avatar: null,
     error: "",
     notifications: {
       count: 20,
@@ -28,7 +30,7 @@ const userSlice = createSlice({
       requested: [],
       next: null,
       previous: null,
-      error: ""
+      error: "",
     },
   },
   reducers: {
@@ -81,6 +83,12 @@ const userSlice = createSlice({
       state.lastName = action.payload.user.last_name;
       state.token = action.payload.access;
       state.refresh = action.payload.refresh;
+      if (action.payload.user.avatar === null || action.payload.user.avatar === ''){
+        state.avatar = DefaultImg;
+      } else {
+        state.avatar = action.payload.user.avatar;
+      }
+      
     },
     [loginUser.rejected]: (state) => {
       state.loading = "Error loading";
@@ -100,6 +108,7 @@ const selectNotificationsReceived = (store) =>
   store.user.notifications.received;
 const selectNotificationsRequested = (store) =>
   store.user.notifications.requested;
+const selectUserAvatar = (store) => store.user.avatar;
 
 export default userSlice.reducer;
 export { selectUserToken };
@@ -111,4 +120,5 @@ export {
   selectNotificationCount,
   selectNotificationsReceived,
   selectNotificationsRequested,
+  selectUserAvatar,
 };
