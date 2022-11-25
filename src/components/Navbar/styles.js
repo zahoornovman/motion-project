@@ -113,6 +113,12 @@ export const ProfileIcon = styled.div`
   :hover {
     border-bottom: 2px solid #ad73fd;
   }
+
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
 `;
 
 export const Menu = styled.div`

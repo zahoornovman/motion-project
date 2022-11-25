@@ -11,6 +11,7 @@ import {
   getNotifications,
   setNotificationError,
 } from "../../store/slices/loginUser";
+import { selectUserAvatar } from "../../store/slices/loginUser";
 
 //other components
 import { NotificationsDropdown } from "../Notifications/NotificationsDropdown";
@@ -31,7 +32,6 @@ import LogoNav from "../../assets/images/logo.png";
 import PostNav from "../../assets/images/posts_logo.png";
 import FriendsNav from "../../assets/svgs/icon-friends.svg";
 import NotificationNav from "../../assets/svgs/notification_bell.svg";
-import ProfilePic from "../../assets/images/users/jennifer.png";
 import MenuIcon from "../../assets/svgs/menu.svg";
 
 function NavBar(props) {
@@ -47,6 +47,8 @@ function NavBar(props) {
 
   const count = useSelector(selectNotificationCount);
   let token = useSelector(selectUserToken);
+  let avatar = useSelector(selectUserAvatar);
+
 
   useEffect(() => {
     var myHeaders = new Headers();
@@ -110,7 +112,7 @@ function NavBar(props) {
 
         <Link to="/profile">
           <ProfileIcon>
-            <img src={ProfilePic} alt="icon-profile" />
+            <img src={avatar} alt="icon-profile" />
           </ProfileIcon>
         </Link>
 
