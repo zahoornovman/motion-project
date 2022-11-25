@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import DefaultImg from '../../assets/images/default.png'
 
 export const loginUser = createAsyncThunk("user/login", async (payload) => {
   const { data } = await axios.post(
@@ -82,7 +83,12 @@ const userSlice = createSlice({
       state.lastName = action.payload.user.last_name;
       state.token = action.payload.access;
       state.refresh = action.payload.refresh;
-      state.avatar = action.payload.user.avatar;
+      if (action.payload.user.avatar === null || action.payload.user.avatar === ''){
+        state.avatar = DefaultImg;
+      } else {
+        state.avatar = action.payload.user.avatar;
+      }
+      
     },
     [loginUser.rejected]: (state) => {
       state.loading = "Error loading";
