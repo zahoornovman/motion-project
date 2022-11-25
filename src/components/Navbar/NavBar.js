@@ -63,9 +63,15 @@ function NavBar(props) {
       "https://motion.propulsion-home.ch/backend/api/social/friends/requests/?limit=5&offset=0",
       requestOptions
     )
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(); // Will `catch` the error below
+        }
+        return response.json();
+      })
       .then((result) => dispatch(getNotifications(result)))
-      .catch((error) => dispatch(setNotificationError(error)));
+      .catch((error) => console.log(error));
+    // .catch((error) => dispatch(setNotificationError(error.text())));
   }, [location]);
 
   return (
@@ -96,10 +102,7 @@ function NavBar(props) {
       <div>
         <NavNotification onClick={handleNotificationOpen}>
           <div>{open === true ? <NotificationsDropdown /> : null}</div>
-          <img           
-            src={NotificationNav}
-            alt="icon-notification"
-          />
+          <img src={NotificationNav} alt="icon-notification" />
           <span>
             <p>{count}</p>
           </span>
