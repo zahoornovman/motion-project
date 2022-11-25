@@ -1,7 +1,9 @@
 //svgs
 import PendingLogo from "../../assets/svgs/pending.svg";
-import Accept from "../../assets/svgs/accept.svg";
-import Reject from "../../assets/svgs/reject.svg";
+// import Accept from "../../assets/svgs/accept.svg";
+// import Reject from "../../assets/svgs/reject.svg";
+import Tick from "../../assets/svgs/tick.svg";
+import Cross from "../../assets/svgs/cross.svg";
 
 //selectors
 import {
@@ -14,7 +16,13 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 
 //SytledComponents
-import { StyledNavDropdown } from "./styles.js";
+import {
+  StyledNavDropdown,
+  StyledSvgAccept,
+  StyledSvgReject,
+  StyledProfilePic,
+  StyledSvgBase,
+} from "./styles.js";
 
 //reducers
 import {
@@ -66,7 +74,7 @@ function NotificationsDropdown() {
 
   //rejecting friend request
   const handleReject = (e) => {
-    console.log("entering Reject");
+    // console.log("entering Reject");
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -88,10 +96,16 @@ function NotificationsDropdown() {
       `https://motion.propulsion-home.ch/backend/api/social/friends/requests/${e.target.id}/`,
       requestOptions
     )
-      .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(); // Will `catch` the error below
+        }
+        return response.json();
+      })
       .then(() => dispatch(updateRemainingNotifications(e.target.id)))
-      .catch((error) => dispatch(setNotificationError(error)));
+      .then(() => dispatch(deleteFriendRequest(e.target.id)))
+      .catch((error) => console.log(error));
+    // .catch((error) => dispatch(setNotificationError(error)));
   };
 
   //accepting friends request
@@ -116,11 +130,15 @@ function NotificationsDropdown() {
       `https://motion.propulsion-home.ch/backend/api/social/friends/requests/${e.target.id}/`,
       requestOptions
     )
-      
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(); // Will `catch` the error below
+        }
+        return response.json();
+      })
       .then(() => dispatch(updateRemainingNotifications(e.target.id)))
-      .catch((error) => console.log(error))
-
+      .then(() => dispatch(deleteFriendRequest(e.target.id)))
+      .catch((error) => console.log(error));
     // .catch((error) => dispatch(setNotificationError(error)));
   };
 
@@ -142,9 +160,15 @@ function NotificationsDropdown() {
       `https://motion.propulsion-home.ch/backend/api/social/friends/requests/${e.target.id}/`,
       requestOptions
     )
-      .then((response) => response.text())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(); // Will `catch` the error below
+        }
+        return response.text();
+      })
       .then(() => dispatch(deleteFriendRequest(e.target.id)))
-      .catch((error) => dispatch(setNotificationError(error)));
+      .catch((error) => console.log(error));
+    // .catch((error) => dispatch(setNotificationError(error)));
   };
 
   //incomplete work. Figuring out how to display a different image when src is missing
@@ -154,47 +178,63 @@ function NotificationsDropdown() {
 
   return (
     <StyledNavDropdown>
-      <h3>Received requests</h3>
+      <div>
+        <h3>Received requests</h3>
 
-      {receivedNotificationsParsed === [] && <div>No Friend Requests</div>}
-      {receivedNotificationsParsed.map((item) => (
-        <div key={item.id}>
-          <img
-            src={item.requesterAvatar}
-            alt={missingAvatar(item.requesterName)}
-          />
-          <div>
-            <div>{item.requesterName}</div>
-            <div>{item.requesterLocation}</div>
+        {receivedNotificationsParsed === [] && <div>No Friend Requests</div>}
+        {receivedNotificationsParsed.map((item) => (
+          <div key={item.id}>
+            <StyledProfilePic
+              src={item.requesterAvatar}
+              alt={missingAvatar(item.requesterName)}
+            />
+            <div>
+              <p>{item.requesterName}</p>
+              <p>{item.requesterLocation}</p>
+            </div>
+            <div>
+              <StyledSvgAccept
+                id={item.id}
+                onClick={handleAccept}
+                src={Tick}
+                alt="A"
+              />
+              <StyledSvgReject
+                id={item.id}
+                onClick={handleReject}
+                src={Cross}
+                alt="R"
+              />
+            </div>
           </div>
-          <div>
-            <img id={item.id} onClick={handleAccept} src={Accept} alt="A" />
-            <img id={item.id} onClick={handleReject} src={Reject} alt="R" />
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
+      <div>
+        <h3>Sent requests</h3>
 
-      <h3>Sent requests</h3>
-      {requestedNotificationsParsed === [] && <div>No Sent Requests</div>}
-      {requestedNotificationsParsed.map((item) => (
-        <div key={item.id}>
-          <img
-            src={item.requestedToAvatar}
-            alt={missingAvatar(item.requestedToName)}
-          />
-          <div>
-            <div>{item.requestedToName}</div>
-            <div>{item.requestedToLocation}</div>
+        {requestedNotificationsParsed === [] && <div>No Sent Requests</div>}
+        {requestedNotificationsParsed.map((item) => (
+          <div key={item.id}>
+            <StyledProfilePic
+              src={item.requestedToAvatar}
+              alt={missingAvatar(item.requestedToName)}
+            />
+            <div>
+              <p>{item.requestedToName}</p>
+              <p>{item.requestedToLocation}</p>
+            </div>
+            <div>
+              <StyledSvgBase src={PendingLogo} alt="Pen" />
+              <StyledSvgReject
+                id={item.id}
+                onClick={handleDelete}
+                src={Cross}
+                alt="R"
+              />
+            </div>
           </div>
-          <div>
-            <img src={PendingLogo} alt="Pen" />
-            <button id={item.id} onClick={handleDelete}>
-              Delete
-            </button>
-            {/* <img id={item.id} onClick={handleDelete} src={Reject} alt="R" /> */}
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </StyledNavDropdown>
   );
 }
