@@ -8,6 +8,7 @@ import { ProfilePost } from "./styledPosts/styles";
 import { PostsWrap } from "./styledPosts/styles";
 
 import ProfilePic from "../assets/images/users/jennifer.png";
+import { selectUserAvatar } from "../store/slices/loginUser";
 import MenuIcon from "../assets/svgs/menu.svg";
 import Share from "../assets/svgs/share.svg";
 import Heart from "../assets/svgs/heart.svg";
@@ -15,12 +16,14 @@ import Heart from "../assets/svgs/heart.svg";
 import { format, formatDistance, subDays } from "date-fns";
 
 const PostExcerpt = ({ post }) => {
+
+  const avatar = useSelector(selectUserAvatar);
   return (
     <>
       <Post>
         <div className="top">
           <ProfilePost>
-            <img src={ProfilePic} alt="icon-profile" />
+            <img src={avatar} alt="icon-profile" />
           </ProfilePost>
 
           <div className="name">
