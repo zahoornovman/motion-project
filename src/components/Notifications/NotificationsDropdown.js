@@ -4,6 +4,7 @@ import PendingLogo from "../../assets/svgs/pending.svg";
 // import Reject from "../../assets/svgs/reject.svg";
 import Tick from "../../assets/svgs/tick.svg";
 import Cross from "../../assets/svgs/cross.svg";
+import DefaultImg from "../../assets/images/default.png";
 
 //selectors
 import {
@@ -181,13 +182,14 @@ function NotificationsDropdown() {
       <div>
         <h3>Received requests</h3>
 
-        {receivedNotifications === [] && <p>No Friend Requests</p>}
+        {receivedNotifications === [] ? <div>No Friend Requests</div> : null}
         {receivedNotificationsParsed.map((item) => (
           <div key={item.id}>
-            <StyledProfilePic
-              src={item.requesterAvatar}
-              alt={missingAvatar(item.requesterName)}
-            />
+            {item.requesterAvatar === null || item.requesterAvatar === "" ? (
+              <StyledProfilePic src={DefaultImg} alt={"img"} />
+            ) : (
+              <StyledProfilePic src={item.requesterAvatar} alt={"img"} />
+            )}
             <div>
               <p>{item.requesterName}</p>
               <p>{item.requesterLocation}</p>
@@ -212,14 +214,15 @@ function NotificationsDropdown() {
       <div>
         <h3>Sent requests</h3>
 
-        {requestedNotifications === [] && <p>No Sent Requests</p>}
+        {requestedNotifications === [] ? <div>No Sent Requests</div> : null}
         {requestedNotificationsParsed.map((item) => (
           <div key={item.id}>
-
-            <StyledProfilePic
-              src={item.requestedToAvatar}
-              alt={missingAvatar(item.requestedToName)}
-            />
+            {item.requestedToAvatar === null ||
+            item.requestedToAvatar === "" ? (
+              <StyledProfilePic src={DefaultImg} alt={""} />
+            ) : (
+              <StyledProfilePic src={item.requestedToAvatar} alt={""} />
+            )}
             <div>
               <p>{item.requestedToName}</p>
               <p>{item.requestedToLocation}</p>
