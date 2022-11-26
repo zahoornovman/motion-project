@@ -106,8 +106,6 @@ export function PostsList() {
     content = <div>{error}</div>;
   }
 
-  
-
   return (
   <div>
     <Searchbar />

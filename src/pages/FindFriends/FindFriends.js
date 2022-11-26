@@ -14,26 +14,28 @@ import { UserCard } from "../../components/UserCard/UserCard";
 function FindFriends() {
   let token = useSelector(selectUserToken);
 
+  //use state to keep track of the users
   const [list, setList] = useState([]);
   const [error, setError] = useState("");
 
+  //user only loaded one time for now
   useEffect(() => {
     loadUsers();
   }, []);
 
   const loadUsers = () => {
-    var myHeaders = new Headers();
+    const myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
 
-    var requestOptions = {
+    const requestOptions = {
       method: "GET",
       headers: myHeaders,
       redirect: "follow",
     };
 
     fetch(
-      "https://motion.propulsion-home.ch/backend/api/users/?limit=200&offset=0",
+      "https://motion.propulsion-home.ch/backend/api/users/?limit=150&offset=0",
       requestOptions
     )
       .then((response) => response.json())
@@ -42,13 +44,13 @@ function FindFriends() {
       .catch((error) => setError(error));
   };
 
+  //filtering out garbage data
   const makePretty = (list) => {
     const newList = list.filter(
       (obj) =>
         obj.email !== "" &&
         obj.first_name !== "" &&
         obj.last_name !== "" &&
-        obj.avatar !== null &&
         obj.location !== "" &&
         obj.about_me !== ""
     );

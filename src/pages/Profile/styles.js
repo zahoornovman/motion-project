@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const StyledMainContainer = styled.div`
+    position: relative;
+    background-color: #f2f2f2;
+    z-index: -2;
+`;
+
 export const StyledBanner = styled.img`
     position: fixed;
     top: 80px;
@@ -11,6 +17,7 @@ export const StyledBanner = styled.img`
 `;
 
 export const StyledProfileCard = styled.section`
+    z-index: 10;
     position: relative;
     margin: 120px auto 34px;
     height: 400px;
@@ -126,10 +133,15 @@ export const StyledStatsContainer = styled.div`
 `;
 
 export const StyledStat = styled.div`
-    min-height: 100%; // goig over a bit like borderbox is not working ??
+    /* min-height: 100%; // goig over a bit like borderbox is not working ?? */
+    height: 100px;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
+    width: 80px;
+
+    /* border-top: 2px solid transparent;
+    border-bottom: 4px solid #ad73fd; */
 
     p {
         font-size: 24px;
@@ -138,4 +150,11 @@ export const StyledStat = styled.div`
     span {
         opacity: 0.5;
     }
+`;
+
+export const StyledStatContainer = styled.section`
+    /* border: 1px solid green; */
+    margin: 34px auto;
+    height: 400px;
+    min-height: 100%;
 `;
