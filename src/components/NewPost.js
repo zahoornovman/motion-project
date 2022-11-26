@@ -5,13 +5,11 @@ import { selectUserAvatar, selectUserToken } from "../store/slices/loginUser";
 import { addNewPost } from "../store/slices/posts";
 import { PostSection, ProfilePost } from "./styledPosts/styles";
 import ProfilePic from "../assets/images/users/jennifer.png";
-import SendBtn from '../assets/svgs/send_button.svg';
+import SendBtn from "../assets/svgs/send_button.svg";
 import { StyledInputFile } from "./styledComponents/StyledInput";
-
 
 function NewPost() {
   const [newPostText, setNewPostText] = useState("");
-  // const [newPostImage, setNewPostImage] = useState("");
   const [newPostImage, setNewPostImage] = useState({ image: "" });
   const avatar = useSelector(selectUserAvatar);
   const dispatch = useDispatch();
@@ -57,13 +55,9 @@ function NewPost() {
           value={newPostText}
           onChange={handleNewPostChange}
         />
-        <StyledInputFile
-          label="Upload image"
-          onChange={onFileChange}
-        ></StyledInputFile>
+        <input name="fileUpload" type="file" onChange={onFileChange}></input>
         <button type="submit">
-            <img src={SendBtn} alt='send button'>
-            </img>
+          <img src={SendBtn} alt="send button"></img>
         </button>
       </PostSection>
     </div>

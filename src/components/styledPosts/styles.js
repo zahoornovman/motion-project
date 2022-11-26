@@ -4,7 +4,7 @@ export const PostSection = styled.form`
   height: 120px;
   width: 560px;
   margin-left: 100px;
-  margin-top: 80px;
+  margin-top: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -53,8 +53,11 @@ export const MenuPost = styled.div`
 
 export const PostsWrap = styled.div`
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  border: 1px solid red;
+  flex-basis: content;
+  height: 2000px;
+
 `;
 
 export const Post = styled.div`
@@ -105,4 +108,59 @@ export const Post = styled.div`
   .Likes {
     margin-right: 20px;
   }
+
+  .post-content {
+    overflow: hidden;
+    margin-left: 20px;
+  }
+
+.hours {
+  font-size: 14px;
+  color: #000000;
+  opacity: 50%;
+}
 `;
+
+export const Search= styled.div`  
+width: 100%;
+border-bottom: 1px solid rgba(25,25,25,0.2);
+display: flex;
+justify-content: space-between;
+align-items: center;
+height: 80px;
+
+
+
+.right {
+  display: flex;
+  margin-right: 150px;
+
+  p{
+    margin-left: 20px;
+    opacity: 50%;
+  }
+
+
+
+}
+
+.left {
+  display: flex;
+  align-items: center;
+
+  img {
+    margin-left: 140px;
+   
+  }
+
+  input {
+    margin-left: 10px;
+    border: none;
+  }
+}
+
+`;
+
+
+
+
