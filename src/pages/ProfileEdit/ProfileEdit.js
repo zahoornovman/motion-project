@@ -40,6 +40,7 @@ export const ProfileEdit = () => {
     const inputBannerImage = useRef(null);
 
     // State
+    //// Store
     const [userStatus, setUserStatus] = React.useState(currentUser.status);
     const [id, setId] = React.useState('');
     const [firstName, setFirstName] = React.useState('');
@@ -269,6 +270,7 @@ export const ProfileEdit = () => {
                             ></StyledInputText>
                             <StyledInputText
                                 label="About"
+                                // biginput={true}
                                 placeholder="Everything they need to know about you"
                                 value={about}
                                 onChange={(e) => {
