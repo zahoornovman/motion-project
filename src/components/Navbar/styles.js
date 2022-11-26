@@ -17,6 +17,7 @@ export const NavContainer = styled.nav`
     font-weight: 400;
     font-size: 22px;
     line-height: 26px;
+  
     /* identical to box height */
     color: #000000;
   }
