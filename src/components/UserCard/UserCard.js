@@ -10,6 +10,10 @@ import {
 } from "../styledComponents/StyledHobbies";
 import { SecondaryButton } from "../styledComponents/StyledButtons";
 
+//svg and imgs
+import DefaultImg from "../../assets/images/default.png";
+
+//libraries and hooks
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { selectUserToken } from "../../store/slices/loginUser";
@@ -45,7 +49,12 @@ function UserCard(props) {
 
   return (
     <StyledUserCard key={props.obj.id}>
-      <img src={props.obj.avatar} alt="Avatar" />
+      {props.obj.avatar ? (
+        <img src={props.obj.avatar} alt="Avatar" />
+      ) : (
+        <img src={DefaultImg} alt="Avatar" />
+      )}
+
       <div>{props.id}</div>
       <StyledName>{fullName}</StyledName>
       <StyledDescription>{props.obj.location}</StyledDescription>

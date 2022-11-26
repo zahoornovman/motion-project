@@ -181,7 +181,7 @@ function NotificationsDropdown() {
       <div>
         <h3>Received requests</h3>
 
-        {receivedNotificationsParsed === [] && <div>No Friend Requests</div>}
+        {receivedNotifications === [] && <p>No Friend Requests</p>}
         {receivedNotificationsParsed.map((item) => (
           <div key={item.id}>
             <StyledProfilePic
@@ -212,9 +212,10 @@ function NotificationsDropdown() {
       <div>
         <h3>Sent requests</h3>
 
-        {requestedNotificationsParsed === [] && <div>No Sent Requests</div>}
+        {requestedNotifications === [] && <p>No Sent Requests</p>}
         {requestedNotificationsParsed.map((item) => (
           <div key={item.id}>
+
             <StyledProfilePic
               src={item.requestedToAvatar}
               alt={missingAvatar(item.requestedToName)}

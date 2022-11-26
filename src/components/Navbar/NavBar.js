@@ -13,6 +13,7 @@ import {
 } from "../../store/slices/loginUser";
 import { selectUserAvatar } from "../../store/slices/loginUser";
 
+
 //other components
 import { NotificationsDropdown } from "../Notifications/NotificationsDropdown";
 
@@ -39,8 +40,9 @@ function NavBar(props) {
   const navigate = useNavigate();
   const location = useLocation();
 
+
   const [open, setOpen] = useState(false);
-  const [notificationsCount, setNotificationsCount] = useState(0);
+  //const [notificationsCount, setNotificationsCount] = useState(0);
 
   const handleNotificationOpen = () => {
     setOpen(!open);
@@ -48,7 +50,8 @@ function NavBar(props) {
 
   const count = useSelector(selectNotificationCount);
   let token = useSelector(selectUserToken);
-  let avatar = useSelector(selectUserAvatar);
+  const avatar = useSelector(selectUserAvatar);
+  // const notification = useSelector(selectNotifications);
 
 
   const fetchNotifications = () => {
@@ -80,8 +83,8 @@ function NavBar(props) {
 
   useEffect(() => {
     fetchNotifications();
-    setNotificationsCount(count);
-  }, [location], notificationsCount );
+    //setNotificationsCount(count);
+  }, [location] );
 
   return (
     <NavContainer>
