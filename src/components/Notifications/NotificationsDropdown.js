@@ -1,246 +1,243 @@
 //svgs
-import PendingLogo from '../../assets/svgs/pending.svg';
+import PendingLogo from "../../assets/svgs/pending.svg";
 // import Accept from "../../assets/svgs/accept.svg";
 // import Reject from "../../assets/svgs/reject.svg";
-import Tick from '../../assets/svgs/tick.svg';
-import Cross from '../../assets/svgs/cross.svg';
+import Tick from "../../assets/svgs/tick.svg";
+import Cross from "../../assets/svgs/cross.svg";
 
 //selectors
 import {
-    selectNotificationsReceived,
-    selectNotificationsRequested,
-    selectUserToken,
-} from '../../store/slices/loginUser';
+  selectNotificationsReceived,
+  selectNotificationsRequested,
+  selectUserToken,
+} from "../../store/slices/loginUser";
 
 //hooks
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 
 //SytledComponents
 import {
-    StyledNavDropdown,
-    StyledSvgAccept,
-    StyledSvgReject,
-    StyledProfilePic,
-    StyledSvgBase,
-} from './styles.js';
+  StyledNavDropdown,
+  StyledSvgAccept,
+  StyledSvgReject,
+  StyledProfilePic,
+  StyledSvgBase,
+} from "./styles.js";
 
 //reducers
 import {
-    deleteFriendRequest,
-    updateRemainingNotifications,
-    setNotificationError,
-} from '../../store/slices/loginUser';
+  deleteFriendRequest,
+  updateRemainingNotifications,
+  setNotificationError,
+} from "../../store/slices/loginUser";
 
 function NotificationsDropdown() {
-    let token = useSelector(selectUserToken);
-    const dispatch = useDispatch();
-    const receivedNotifications = useSelector(selectNotificationsReceived);
-    const requestedNotifications = useSelector(selectNotificationsRequested);
+  let token = useSelector(selectUserToken);
+  const dispatch = useDispatch();
+  const receivedNotifications = useSelector(selectNotificationsReceived);
+  const requestedNotifications = useSelector(selectNotificationsRequested);
 
-    const receivedNotificationsParsed = receivedRequests(receivedNotifications);
-    const requestedNotificationsParsed = requestedRequests(
-        requestedNotifications
-    );
+  const receivedNotificationsParsed = receivedRequests(receivedNotifications);
+  const requestedNotificationsParsed = requestedRequests(
+    requestedNotifications
+  );
 
-    //function for parsing notifications array for easy access in return function
-    function receivedRequests(receivedNotifications) {
-        const received = receivedNotifications.map((item) => {
-            let obj = {
-                id: item.id,
-                requesterAvatar: item.requester.avatar,
-                requesterName:
-                    item.requester.first_name + ' ' + item.requester.last_name,
-                requesterLocation: item.requester.location,
-            };
-            return obj;
-        });
-        return received;
-    }
+  //function for parsing notifications array for easy access in return function
+  function receivedRequests(receivedNotifications) {
+    const received = receivedNotifications.map((item) => {
+      let obj = {
+        id: item.id,
+        requesterAvatar: item.requester.avatar,
+        requesterName:
+          item.requester.first_name + " " + item.requester.last_name,
+        requesterLocation: item.requester.location,
+      };
+      return obj;
+    });
+    return received;
+  }
 
-    //function for parsing notifications array for easy access in return function
-    function requestedRequests(requestedNotifications) {
-        const requested = requestedNotifications.map((item) => {
-            let obj = {
-                id: item.id,
-                requestedToAvatar: item.receiver.avatar,
-                requestedToName:
-                    item.receiver.first_name + ' ' + item.receiver.last_name,
-                requestedToLocation: item.receiver.location,
-            };
-            return obj;
-        });
-        return requested;
-    }
+  //function for parsing notifications array for easy access in return function
+  function requestedRequests(requestedNotifications) {
+    const requested = requestedNotifications.map((item) => {
+      let obj = {
+        id: item.id,
+        requestedToAvatar: item.receiver.avatar,
+        requestedToName:
+          item.receiver.first_name + " " + item.receiver.last_name,
+        requestedToLocation: item.receiver.location,
+      };
+      return obj;
+    });
+    return requested;
+  }
 
-    //rejecting friend request
-    const handleReject = (e) => {
-        // console.log("entering Reject");
+  //rejecting friend request
+  const handleReject = (e) => {
+    // console.log("entering Reject");
 
-        var myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Accept', 'application/json');
-        myHeaders.append('Authorization', `Bearer ${token}`);
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Accept", "application/json");
+    myHeaders.append("Authorization", `Bearer ${token}`);
 
-        let raw = JSON.stringify({
-            status: 'R',
-        });
+    const raw = JSON.stringify({
+      status: "R",
+    });
 
-        let requestOptions = {
-            method: 'PATCH',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow',
-        };
-
-        fetch(
-            `https://motion.propulsion-home.ch/backend/api/social/friends/requests/${e.target.id}/`,
-            requestOptions
-        )
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(); // Will `catch` the error below
-                }
-                return response.json();
-            })
-            .then(() => dispatch(updateRemainingNotifications(e.target.id)))
-            .then(() => dispatch(deleteFriendRequest(e.target.id)))
-            .catch((error) => console.log(error));
-        // .catch((error) => dispatch(setNotificationError(error)));
+    const requestOptions = {
+      method: "PATCH",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
     };
 
-    //accepting friends request
-    const handleAccept = (e) => {
-        var myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Accept', 'application/json');
-        myHeaders.append('Authorization', `Bearer ${token}`);
+    fetch(
+      `https://motion.propulsion-home.ch/backend/api/social/friends/requests/${e.target.id}/`,
+      requestOptions
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(); // Will `catch` the error below
+        }
+        return response.json();
+      })
+      .then(() => dispatch(updateRemainingNotifications(e.target.id)))
+      .then(() => dispatch(deleteFriendRequest(e.target.id)))
+      .catch((error) => console.log(error));
+    // .catch((error) => dispatch(setNotificationError(error)));
+  };
 
-        let raw = JSON.stringify({
-            status: 'A',
-        });
+  //accepting friends request
+  const handleAccept = (e) => {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Accept", "application/json");
+    myHeaders.append("Authorization", `Bearer ${token}`);
 
-        let requestOptions = {
-            method: 'PATCH',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow',
-        };
+    const raw = JSON.stringify({
+      status: "A",
+    });
 
-        fetch(
-            `https://motion.propulsion-home.ch/backend/api/social/friends/requests/${e.target.id}/`,
-            requestOptions
-        )
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(); // Will `catch` the error below
-                }
-                return response.json();
-            })
-            .then(() => dispatch(updateRemainingNotifications(e.target.id)))
-            .then(() => dispatch(deleteFriendRequest(e.target.id)))
-            .catch((error) => console.log(error));
-        // .catch((error) => dispatch(setNotificationError(error)));
+    const requestOptions = {
+      method: "PATCH",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
     };
 
-    //deleting sent friend request
-    const handleDelete = (e) => {
-        e.preventDefault();
-        console.log('entering Delete');
-        let myHeaders = new Headers();
+    fetch(
+      `https://motion.propulsion-home.ch/backend/api/social/friends/requests/${e.target.id}/`,
+      requestOptions
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(); // Will `catch` the error below
+        }
+        return response.json();
+      })
+      .then(() => dispatch(updateRemainingNotifications(e.target.id)))
+      .then(() => dispatch(deleteFriendRequest(e.target.id)))
+      .catch((error) => console.log(error));
+    // .catch((error) => dispatch(setNotificationError(error)));
+  };
 
-        myHeaders.append('Authorization', `Bearer ${token}`);
+  //deleting sent friend request
+  const handleDelete = (e) => {
+    e.preventDefault();
+    console.log("entering Delete");
+    const myHeaders = new Headers();
 
-        let requestOptions = {
-            method: 'DELETE',
-            headers: myHeaders,
-            redirect: 'follow',
-        };
+    myHeaders.append("Authorization", `Bearer ${token}`);
 
-        fetch(
-            `https://motion.propulsion-home.ch/backend/api/social/friends/requests/${e.target.id}/`,
-            requestOptions
-        )
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(); // Will `catch` the error below
-                }
-                return response.text();
-            })
-            .then(() => dispatch(deleteFriendRequest(e.target.id)))
-            .catch((error) => console.log(error));
-        // .catch((error) => dispatch(setNotificationError(error)));
+    const requestOptions = {
+      method: "DELETE",
+      headers: myHeaders,
+      redirect: "follow",
     };
 
-    //incomplete work. Figuring out how to display a different image when src is missing
-    const missingAvatar = (name) => {
-        return name[0];
-    };
+    fetch(
+      `https://motion.propulsion-home.ch/backend/api/social/friends/requests/${e.target.id}/`,
+      requestOptions
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(); // Will `catch` the error below
+        }
+        return response.text();
+      })
+      .then(() => dispatch(deleteFriendRequest(e.target.id)))
+      .catch((error) => console.log(error));
+    // .catch((error) => dispatch(setNotificationError(error)));
+  };
 
-    return (
-        <StyledNavDropdown>
+  //incomplete work. Figuring out how to display a different image when src is missing
+  const missingAvatar = (name) => {
+    return name[0];
+  };
+
+  return (
+    <StyledNavDropdown>
+      <div>
+        <h3>Received requests</h3>
+
+        {receivedNotifications === [] && <p>No Friend Requests</p>}
+        {receivedNotificationsParsed.map((item) => (
+          <div key={item.id}>
+            <StyledProfilePic
+              src={item.requesterAvatar}
+              alt={missingAvatar(item.requesterName)}
+            />
             <div>
-                <h3>Received requests</h3>
-
-                {receivedNotificationsParsed === [] && (
-                    <div>No Friend Requests</div>
-                )}
-                {receivedNotificationsParsed.map((item) => (
-                    <div key={item.id}>
-                        <StyledProfilePic
-                            src={item.requesterAvatar}
-                            alt={missingAvatar(item.requesterName)}
-                        />
-                        <div>
-                            <p>{item.requesterName}</p>
-                            <p>{item.requesterLocation}</p>
-                        </div>
-                        <div>
-                            <StyledSvgAccept
-                                id={item.id}
-                                onClick={handleAccept}
-                                src={Tick}
-                                alt="A"
-                            />
-                            <StyledSvgReject
-                                id={item.id}
-                                onClick={handleReject}
-                                src={Cross}
-                                alt="R"
-                            />
-                        </div>
-                    </div>
-                ))}
+              <p>{item.requesterName}</p>
+              <p>{item.requesterLocation}</p>
             </div>
             <div>
-                <h3>Sent requests</h3>
-
-                {requestedNotificationsParsed === [] && (
-                    <div>No Sent Requests</div>
-                )}
-                {requestedNotificationsParsed.map((item) => (
-                    <div key={item.id}>
-                        <StyledProfilePic
-                            src={item.requestedToAvatar}
-                            alt={missingAvatar(item.requestedToName)}
-                        />
-                        <div>
-                            <p>{item.requestedToName}</p>
-                            <p>{item.requestedToLocation}</p>
-                        </div>
-                        <div>
-                            <StyledSvgBase src={PendingLogo} alt="Pen" />
-                            <StyledSvgReject
-                                id={item.id}
-                                onClick={handleDelete}
-                                src={Cross}
-                                alt="R"
-                            />
-                        </div>
-                    </div>
-                ))}
+              <StyledSvgAccept
+                id={item.id}
+                onClick={handleAccept}
+                src={Tick}
+                alt="A"
+              />
+              <StyledSvgReject
+                id={item.id}
+                onClick={handleReject}
+                src={Cross}
+                alt="R"
+              />
             </div>
-        </StyledNavDropdown>
-    );
+          </div>
+        ))}
+      </div>
+      <div>
+        <h3>Sent requests</h3>
+
+        {requestedNotifications === [] && <p>No Sent Requests</p>}
+        {requestedNotificationsParsed.map((item) => (
+          <div key={item.id}>
+
+            <StyledProfilePic
+              src={item.requestedToAvatar}
+              alt={missingAvatar(item.requestedToName)}
+            />
+            <div>
+              <p>{item.requestedToName}</p>
+              <p>{item.requestedToLocation}</p>
+            </div>
+            <div>
+              <StyledSvgBase src={PendingLogo} alt="Pen" />
+              <StyledSvgReject
+                id={item.id}
+                onClick={handleDelete}
+                src={Cross}
+                alt="R"
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    </StyledNavDropdown>
+  );
 }
 
 export { NotificationsDropdown };

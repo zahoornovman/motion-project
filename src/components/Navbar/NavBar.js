@@ -13,6 +13,7 @@ import {
 } from "../../store/slices/loginUser";
 import { selectUserAvatar } from "../../store/slices/loginUser";
 
+
 //other components
 import { NotificationsDropdown } from "../Notifications/NotificationsDropdown";
 
@@ -39,7 +40,9 @@ function NavBar(props) {
   const navigate = useNavigate();
   const location = useLocation();
 
+
   const [open, setOpen] = useState(false);
+  //const [notificationsCount, setNotificationsCount] = useState(0);
 
   const handleNotificationOpen = () => {
     setOpen(!open);
@@ -47,15 +50,16 @@ function NavBar(props) {
 
   const count = useSelector(selectNotificationCount);
   let token = useSelector(selectUserToken);
-  let avatar = useSelector(selectUserAvatar);
+  const avatar = useSelector(selectUserAvatar);
+  // const notification = useSelector(selectNotifications);
 
 
-  useEffect(() => {
-    var myHeaders = new Headers();
+  const fetchNotifications = () => {
+    const myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
 
-    var requestOptions = {
+    const requestOptions = {
       method: "GET",
       headers: myHeaders,
       redirect: "follow",
@@ -74,7 +78,13 @@ function NavBar(props) {
       .then((result) => dispatch(getNotifications(result)))
       .catch((error) => console.log(error));
     // .catch((error) => dispatch(setNotificationError(error.text())));
-  }, [location]);
+
+  }
+
+  useEffect(() => {
+    fetchNotifications();
+    //setNotificationsCount(count);
+  }, [location] );
 
   return (
     <NavContainer>

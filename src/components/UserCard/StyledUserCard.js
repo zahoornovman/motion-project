@@ -24,7 +24,9 @@ export const StyledUserCard = styled.div`
 
   img {
     width: 50px;
-    padding: 10px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid lightgrey;
   }
 
   div {

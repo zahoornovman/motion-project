@@ -110,18 +110,20 @@ const selectNotificationCount = (store) => store.user.notifications.count;
 const selectNotificationsReceived = (store) =>
     store.user.notifications.received;
 const selectNotificationsRequested = (store) =>
-    store.user.notifications.requested;
+  store.user.notifications.requested;
+const selectNotifications = (store) => store.user.notifications;
 const selectUserAvatar = (store) => store.user.avatar;
 
 export default userSlice.reducer;
 export { selectUserToken };
 export {
-    getNotifications,
-    setNotificationError,
-    deleteFriendRequest,
-    updateRemainingNotifications,
-    selectNotificationCount,
-    selectNotificationsReceived,
-    selectNotificationsRequested,
-    selectUserAvatar,
+  getNotifications,
+  setNotificationError,
+  deleteFriendRequest,
+  updateRemainingNotifications,
+  selectNotificationCount,
+  selectNotificationsReceived,
+  selectNotificationsRequested,
+  selectNotifications,
+  selectUserAvatar,
 };
