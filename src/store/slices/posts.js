@@ -29,7 +29,7 @@ export const addNewPost = createAsyncThunk(
   "posts/addNewPost",
   async (payload) => {
     let formdata = new FormData();
-    formdata.append("images", payload.newPostImage, "[PROXY]");
+    formdata.append("images", payload.newPostImage);
     formdata.append("content", payload.newPostText);
 
     try {
