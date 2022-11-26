@@ -13,6 +13,7 @@ import Share from '../assets/svgs/share.svg';
 import Heart from '../assets/svgs/heart.svg';
 
 import { format, formatDistance, subDays } from 'date-fns';
+import Searchbar from './Searchbar';
 
 const PostExcerpt = ({ post }) => {
     return (
@@ -28,10 +29,7 @@ const PostExcerpt = ({ post }) => {
                             {post.user.first_name} {post.user.last_name}
                         </p>
                         {/* <p>Avatar: {post.user.avatar}</p> */}
-
-                        <p>{Date.parse(post.created)}</p>
-                        <p>{format(Date.parse(post.created), 'MMMM dd')}</p>
-                        <p>
+                        <p className="hours">
                             {formatDistance(
                                 Date.parse(post.created),
                                 new Date(),
@@ -41,23 +39,6 @@ const PostExcerpt = ({ post }) => {
                             )}
                         </p>
                     </div>
-
-                    <p>
-                        <input
-                            type="checkbox"
-                            id="following"
-                            defaultChecked={post.logged_in_user_is_following}
-                        />
-                        <label for="liked">Is Following</label>
-                    </p>
-                    <p>
-                        <input
-                            type="checkbox"
-                            id="friends"
-                            defaultChecked={post.logged_in_user_is_friends}
-                        />
-                        <label for="friends">Is Friends</label>
-                    </p>
 
                     <MenuPost>
                         <img src={MenuIcon} alt="icon-profile" />
@@ -72,14 +53,6 @@ const PostExcerpt = ({ post }) => {
                     <div className="Heart">
                         <img src={Heart} alt="heart" />
                         <p>Like</p>
-                        <p>
-                            <input
-                                type="checkbox"
-                                id="liked"
-                                defaultChecked={post.logged_in_user_liked}
-                            />
-                            <label for="liked">Liked</label>
-                        </p>
                     </div>
                     <div className="Share">
                         <img src={Share} alt="share" />
@@ -142,10 +115,13 @@ export function PostsList(props) {
     }
 
     return (
-        <PostsWrap>
-            <NewPost />
-            {content}
-        </PostsWrap>
+        <div>
+            <Searchbar />
+            <PostsWrap>
+                <NewPost />
+                {content}
+            </PostsWrap>
+        </div>
     );
 }
 
