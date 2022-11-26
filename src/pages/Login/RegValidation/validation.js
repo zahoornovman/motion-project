@@ -46,7 +46,7 @@ const RegValidation = () => {
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
 
-  const handleOnSubmit = (event) => {
+  const handleOnSubmit = async (event) => {
     event.preventDefault();
     console.log(registerUser);
     const email = registerUser.email;
@@ -59,13 +59,16 @@ const RegValidation = () => {
       first_name,
       last_name,
     };
-    dispatch(validationUser(payload));
-    if (userValidation.status === "status error") {
+   
+    await dispatch(validationUser(payload));
+      if (userValidation.status === "status error") {
       navigate("/registration/validation/error");
     } else {
-      navigate("/registration/validation/success");
+      navigate("/login");
     }
-  };
+  }
+    
+      
 
   return (
     <Container>
@@ -106,15 +109,15 @@ const RegValidation = () => {
               />
             </label>
             <div>
-              <label>
+              {/* <label>
                 Email
                 <input
                   type="text"
                   placeholder="Email"
                   value={email}
-                  onChange={(e) => setEmail(e.currentTarget.value)}
+  
                 />
-              </label>
+              </label> */}
               <label>
                 Username
                 <input
@@ -162,7 +165,7 @@ const RegValidation = () => {
               </label>
             </div>
 
-            <SignInBtn onClick={() => navigate("/login")}>
+            <SignInBtn >
               <p>COMPLETE</p>
             </SignInBtn>
           </FormVali>

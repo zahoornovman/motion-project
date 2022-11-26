@@ -36,6 +36,7 @@ const validationSlice = createSlice({
       state.status = "loading complete";
     },
     [validationUser.rejected]: (state, action) => {
+      console.log('reject')
       state.errorUserName = action.payload.username;
       state.errorCode = action.payload.code;
       state.status = "status error";
