@@ -110,7 +110,7 @@ export function PostsList() {
     if (postStatus === "idle") {
       dispatch(fetchPosts(payload));
     }
-  }, [postStatus, dispatch]);
+  }, [postStatus, dispatch, payload]);
 
   let content;
 
@@ -129,6 +129,8 @@ export function PostsList() {
     console.log("fail");
     content = <div>{error}</div>;
   }
+
+  
 
   return (
     <PostsWrap>
