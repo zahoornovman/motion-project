@@ -25,6 +25,11 @@ export const PostSection = styled.form`
     height: 50px;
     border: none;
   }
+
+  .file {
+    width: 88px;
+  }
+
 `;
 
 export const ProfilePost = styled.div`
@@ -57,7 +62,6 @@ export const PostsWrap = styled.div`
   flex-wrap: wrap;
   flex-basis: content;
   height: 2000px;
-
 `;
 
 export const Post = styled.div`
@@ -114,53 +118,42 @@ export const Post = styled.div`
     margin-left: 20px;
   }
 
-.hours {
-  font-size: 14px;
-  color: #000000;
-  opacity: 50%;
-}
-`;
-
-export const Search= styled.div`  
-width: 100%;
-border-bottom: 1px solid rgba(25,25,25,0.2);
-display: flex;
-justify-content: space-between;
-align-items: center;
-height: 80px;
-
-
-
-.right {
-  display: flex;
-  margin-right: 150px;
-
-  p{
-    margin-left: 20px;
+  .hours {
+    font-size: 14px;
+    color: #000000;
     opacity: 50%;
   }
-
-
-
-}
-
-.left {
-  display: flex;
-  align-items: center;
-
-  img {
-    margin-left: 140px;
-   
-  }
-
-  input {
-    margin-left: 10px;
-    border: none;
-  }
-}
-
 `;
 
+export const Search = styled.div`
+  width: 100%;
+  border-bottom: 1px solid rgba(25, 25, 25, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
 
+  .right {
+    display: flex;
+    margin-right: 150px;
 
+    p {
+      margin-left: 20px;
+      opacity: 50%;
+    }
+  }
 
+  .left {
+    display: flex;
+    align-items: center;
+
+    img {
+      margin-left: 140px;
+    }
+
+    input {
+      margin-left: 10px;
+      border: none;
+    }
+  }
+`;
