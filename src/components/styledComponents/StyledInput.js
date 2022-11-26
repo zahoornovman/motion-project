@@ -13,6 +13,7 @@ export const StyledInputText = (props) => {
                 placeholder={props.placeholder}
                 onChange={props.onChange}
                 value={props.value}
+                // biginput={props.biginput}
             ></input>
         </InputText>
     );
@@ -36,6 +37,7 @@ export const InputText = styled.div`
     input {
         border: none;
         border-bottom: 1px solid #00000020;
+        /* height: ${(props) => (props.biginput ? '100px' : 'auto')}; */
     }
 
     button {

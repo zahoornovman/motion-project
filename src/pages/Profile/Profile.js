@@ -20,7 +20,11 @@ import {
     StyledStat,
     StyledBanner,
     StyledBannerUpdateBtn,
+    StyledStatContainer,
+    StyledMainContainer,
 } from './styles';
+import { FindFriends } from '../FindFriends/FindFriends';
+import PostsList from '../../components/PostsList';
 
 // Assets
 import Camera from '../../assets/images/users/camera.svg';
@@ -41,6 +45,7 @@ export const Profile = () => {
     const dispatch = useDispatch();
 
     // State
+    //// Store
     // const [id, setId] = React.useState('');
     // const [username, setUsername] = React.useState('');
     // const [job, setJob] = React.useState('');
@@ -59,7 +64,24 @@ export const Profile = () => {
     const [amountOfFollowers, setAmountOfFollowers] = React.useState('');
     const [amountFollowing, setAmountFollowing] = React.useState('');
 
+    //// Components
+    const initialSelection = {
+        posts: false,
+        likes: false,
+        friends: false,
+        followers: false,
+        following: false,
+    };
+    const [selected, setSelected] = React.useState(initialSelection);
+
     // Methods
+    const selectStat = (statName) => {
+        const newSelection = initialSelection;
+        newSelection[statName] = true;
+        console.log(newSelection);
+        setSelected(newSelection);
+    };
+
     const onLoad = () => {
         const payload = { token: `Bearer ${token}` };
         dispatch(getCurrentUser(payload));
@@ -143,29 +165,64 @@ export const Profile = () => {
                         </StyledHobbiesSection>
                     </StyledTopContainer>
                     <StyledStatsContainer>
-                        <StyledStat id="posts">
+                        <StyledStat
+                            id="posts"
+                            selected={false}
+                            onClick={(e) => {
+                                const statName = 'posts';
+                                selectStat(statName);
+                            }}
+                        >
                             <p>{amountOfPosts}</p>
                             <span>Posts</span>
                         </StyledStat>
-                        <StyledStat id="likes">
+                        <StyledStat
+                            id="likes"
+                            onClick={(e) => {
+                                const statName = 'likes';
+                                selectStat(statName);
+                            }}
+                        >
                             <p>{amountOfLikes}</p>
                             <span>Likes</span>
                         </StyledStat>
-                        <StyledStat id="friends">
+                        <StyledStat
+                            id="friends"
+                            onClick={(e) => {
+                                const statName = 'friends';
+                                selectStat(statName);
+                            }}
+                        >
                             <p>{amountOfFriends}</p>
                             <span>Friends</span>
                         </StyledStat>
-                        <StyledStat id="followers">
+                        <StyledStat
+                            id="followers"
+                            onClick={(e) => {
+                                const statName = 'followers';
+                                selectStat(statName);
+                            }}
+                        >
                             <p>{amountOfFollowers}</p>
                             <span>Followers</span>
                         </StyledStat>
-                        <StyledStat id="following">
+                        <StyledStat
+                            id="following"
+                            onClick={(e) => {
+                                const statName = 'following';
+                                selectStat(statName);
+                            }}
+                        >
                             <p>{amountFollowing}</p>
                             <span>Following</span>
                         </StyledStat>
                     </StyledStatsContainer>
                 </StyledUserDetailsContainer>
             </StyledProfileCard>
+            <StyledStatContainer>
+                {selected.friends ? <FindFriends /> : false}
+                {selected.posts ? <PostsList /> : false}
+            </StyledStatContainer>
         </>
     );
 };
