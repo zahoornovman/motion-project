@@ -33,8 +33,6 @@ const Registration = () => {
 
   const [email, setEmail] = useState("");
 
-  console.log(email);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     await dispatch(newUser({ email }));
