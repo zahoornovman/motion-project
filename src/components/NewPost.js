@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUserToken } from "../store/slices/loginUser";
+import { selectUserAvatar, selectUserToken } from "../store/slices/loginUser";
+// import { addPost } from '../store/slices/posts';
 import { addNewPost } from "../store/slices/posts";
 import { PostSection, ProfilePost } from "./styledPosts/styles";
 import ProfilePic from "../assets/images/users/jennifer.png";
@@ -10,6 +11,7 @@ import { StyledInputFile } from "./styledComponents/StyledInput";
 function NewPost() {
   const [newPostText, setNewPostText] = useState("");
   const [newPostImage, setNewPostImage] = useState({ image: "" });
+  const avatar = useSelector(selectUserAvatar);
   const dispatch = useDispatch();
   const body = {
     newPostText: newPostText,
@@ -44,9 +46,9 @@ function NewPost() {
   return (
     <div className="NewPost">
       <PostSection onSubmit={handleAddPost}>
-        <ProfilePost>
-          <img src={ProfilePic} alt="icon-profile" />
-        </ProfilePost>
+          <ProfilePost>
+            <img src={avatar} alt="icon-profile" />
+          </ProfilePost>
         <input
           type="text"
           placeholder="What's on your mind, name?"
