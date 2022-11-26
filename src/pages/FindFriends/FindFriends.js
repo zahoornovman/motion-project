@@ -18,6 +18,7 @@ function FindFriends() {
   const [list, setList] = useState([]);
   const [error, setError] = useState("");
 
+  //user only loaded one time for now
   useEffect(() => {
     loadUsers();
   }, []);
@@ -34,7 +35,7 @@ function FindFriends() {
     };
 
     fetch(
-      "https://motion.propulsion-home.ch/backend/api/users/?limit=200&offset=0",
+      "https://motion.propulsion-home.ch/backend/api/users/?limit=150&offset=0",
       requestOptions
     )
       .then((response) => response.json())
@@ -43,13 +44,13 @@ function FindFriends() {
       .catch((error) => setError(error));
   };
 
+  //filtering out garbage data
   const makePretty = (list) => {
     const newList = list.filter(
       (obj) =>
         obj.email !== "" &&
         obj.first_name !== "" &&
         obj.last_name !== "" &&
-        obj.avatar !== null &&
         obj.location !== "" &&
         obj.about_me !== ""
     );
