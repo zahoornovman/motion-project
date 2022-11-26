@@ -1,6 +1,23 @@
 import styled from 'styled-components';
 
+export const StyledMainContainer = styled.div`
+    position: relative;
+    background-color: #f2f2f2;
+`;
+
+export const StyledBanner = styled.img`
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    z-index: -1;
+    max-height: 800px;
+`;
+
 export const StyledProfileCard = styled.section`
+    z-index: 0;
+    position: relative;
     margin: 120px auto 34px;
     height: 400px;
     min-height: 100%;
@@ -24,15 +41,23 @@ export const StyledAvatar = styled.div`
     height: 100%;
     border-right: 2px solid #00000010;
 
-    img {
-        height: 100px;
+    div {
+        margin: auto 0px 20px 0px;
         width: 100px;
-        margin: auto 0px 6px 0px;
+        height: 100px;
+        overflow: hidden;
+        border-radius: 50%;
+
+        img {
+            width: 100px;
+            height: auto;
+        }
     }
 
     #name {
         margin: 6px 0px 4px 0px;
         font-size: 24px;
+        text-align: center;
     }
 
     #location {
@@ -46,9 +71,10 @@ export const StyledAvatar = styled.div`
 
 export const StyledUserDetailsContainer = styled.div`
     height: 100%;
+    width: 100%;
 `;
 export const StyledTopContainer = styled.div`
-    max-height: 70%;
+    min-height: 70%;
     display: flex;
     border-bottom: 2px solid #00000010;
     border-top: 2px solid #00000000;
@@ -58,7 +84,8 @@ export const StyledContactSection = styled.section`
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
-    margin: 40px 30px 30px;
+    margin: 40px 30px;
+    max-width: 50%;
 
     #about {
         line-height: 26px;
@@ -89,22 +116,8 @@ export const StyledHobbiesSection = styled.section`
     display: flex;
     flex-flow: column;
     justify-content: flex-start;
-    margin: 40px 30px 30px;
-
-    div {
-        display: flex;
-        flex-flow: row wrap;
-        width: 100%;
-        margin: 16px 0%;
-        p {
-            margin: 5px;
-            padding: 8px;
-            background-color: lightgray;
-            background: #00000005;
-            border: 1px solid #00000005;
-            border-radius: 18px;
-        }
-    }
+    margin: 40px 30px;
+    max-width: 50%;
 `;
 
 export const StyledStatsContainer = styled.div`
@@ -119,10 +132,15 @@ export const StyledStatsContainer = styled.div`
 `;
 
 export const StyledStat = styled.div`
-    min-height: 100%; // goig over a bit like borderbox is not working ??
+    /* min-height: 100%; // goig over a bit like borderbox is not working ?? */
+    height: 100px;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
+    width: 80px;
+
+    /* border-top: 2px solid transparent;
+    border-bottom: 4px solid #ad73fd; */
 
     p {
         font-size: 24px;
@@ -131,4 +149,11 @@ export const StyledStat = styled.div`
     span {
         opacity: 0.5;
     }
+`;
+
+export const StyledStatContainer = styled.section`
+    /* border: 1px solid green; */
+    margin: 34px auto;
+    height: 400px;
+    min-height: 100%;
 `;

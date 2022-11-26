@@ -34,10 +34,10 @@ const registerUser = createSlice({
     [newUser.fulfilled]: (state, action) => {
       console.log(action);
       state.email = action.meta.arg.email;
+      console.log(action.meta.arg.email)
       state.loading = "loading complete";
     },
     [newUser.rejected]: (state, action) => {
-      //console.log(action)
       state.error = action.payload.email;
       state.loading = "Error Loading";
     },
