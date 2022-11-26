@@ -28,8 +28,6 @@ const PostExcerpt = ({ post }) => {
               {post.user.first_name} {post.user.last_name}
             </p>
             {/* <p>Avatar: {post.user.avatar}</p> */}
-
-            <p>{Date.parse(post.created)}</p>
             <p>{format(Date.parse(post.created), "MMMM dd")}</p>
             <p>
               {formatDistance(Date.parse(post.created), new Date(), {
@@ -129,8 +127,6 @@ export function PostsList() {
     console.log("fail");
     content = <div>{error}</div>;
   }
-
-  
 
   return (
     <PostsWrap>
