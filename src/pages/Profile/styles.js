@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const StyledMainContainer = styled.div`
     position: relative;
     background-color: #f2f2f2;
-    z-index: -2;
 `;
 
 export const StyledBanner = styled.img`
@@ -17,7 +16,7 @@ export const StyledBanner = styled.img`
 `;
 
 export const StyledProfileCard = styled.section`
-    z-index: 10;
+    z-index: 0;
     position: relative;
     margin: 120px auto 34px;
     height: 400px;

@@ -220,8 +220,12 @@ export const Profile = () => {
                 </StyledUserDetailsContainer>
             </StyledProfileCard>
             <StyledStatContainer>
-                {selected.friends ? <FindFriends /> : false}
-                {selected.posts ? <PostsList /> : false}
+                {selected.friends ? (
+                    <FindFriends filter={'currentUser'} />
+                ) : (
+                    false
+                )}
+                {selected.posts ? <PostsList filter={'currentUser'} /> : false}
             </StyledStatContainer>
         </>
     );

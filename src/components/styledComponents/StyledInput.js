@@ -53,11 +53,17 @@ export const StyledInputTextHobbies = (props) => {
                 {props.hobbies.map((hobby, index) => {
                     return (
                         <StyledHobbiesIcon
-                            onClick={props.removeHobby}
+                            onClick={(e) => {
+                                props.removeHobby(e, e.target.innerHTML);
+                            }}
                             key={index}
                         >
-                            {hobby}
-                            <img src={cross} alt="" />
+                            <p>{hobby}</p>
+                            {/* <img
+                                onClick={e.parentElement.innerHTML}
+                                src={cross}
+                                alt=""
+                            /> */}
                         </StyledHobbiesIcon>
                     );
                 })}

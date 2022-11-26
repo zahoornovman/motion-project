@@ -132,10 +132,6 @@ export const ProfileEdit = () => {
     };
 
     const saveUpdates = () => {
-        // console.log('updated user body', JSON.stringify(updatedUser));
-        // console.log('type of avatar', typeof updatedUser.avatar);
-        // console.log('type of banner', typeof updatedUser.banner);
-
         const payloadText = {
             token: `Bearer ${token}`,
             body: updatedUserText,
