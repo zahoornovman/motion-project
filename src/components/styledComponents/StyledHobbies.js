@@ -26,4 +26,8 @@ export const StyledHobbiesIcon = styled.button`
     box-sizing: content-box;
 
     font-size: 14px;
+
+    img {
+        pointer-events: none;
+    }
 `;
